@@ -6,7 +6,7 @@
 
     $("#menu")
         .append("<h1>Casino MOTARO</h1>")
-        .append("<img src='../img/motaro.png' />");
+        .append("<img src='./img/motaro.png' />");
 
     if (!isUserLogged()) {
         showLoginForm();
@@ -37,10 +37,16 @@
     });
 
     $("#menu-item-two").on("click", function() {
+        if (!isUserLogged()) {
+            showErrorMessageNotLoggedUser();
+        }
 
     });
 
     $("#menu-item-three").on("click", function() {
+        if (!isUserLogged()) {
+            showErrorMessageNotLoggedUser();
+        }
 
     });
 }());
@@ -62,30 +68,39 @@ function showLoginForm() {
 }
 
 function showErrorMessageNotLoggedUser() {
-    //     $("#menu-item-one a")
-    //         .attr("data-toggle", "modal")
-    //         .attr("data-target", "#myModal")
-    //         .append(`<div class="modal fade" id="myModal" role="dialog">
-    //                     <div class="modal-dialog">
-    //                         <div class="modal-content">
-    //                             <div class="modal-header">
-    //                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-    //                                 <h4 class="modal-title">Error</h4>
-    //                             </div>
-    //                             <div class="modal-body">
-    //                                 <p>You must login to play in our casino!</p>
-    //                             </div>
-    //                             <div class="modal-footer">
-    //                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </div>`);
+    $("#menu-item-one a")
+        .attr("data-toggle", "modal")
+        .attr("data-target", "#errorMessage");
 
-    //     $("#menu a").remove("#errorMessage");
+    $("#menu-item-two a")
+        .attr("data-toggle", "modal")
+        .attr("data-target", "#errorMessage");
 
-    alert("Opsaa");
+    $("#menu-item-three a")
+        .attr("data-toggle", "modal")
+        .attr("data-target", "#errorMessage");
 
+    let p = $("#menu").find("#errorMessage");
+
+    if (!p.length) {
+        $("#menu")
+            .append(`<div class="modal fade" id="errorMessage" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Error</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>You must login to play in our casino!</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`);
+    }
 }
 
 function isUserLogged() {
