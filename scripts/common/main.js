@@ -1,5 +1,9 @@
 // Casino start point
 
+import "jquery";
+import "bootstrap";
+import * as validate from "validator";
+
 (function showMenu() {
     $("#gameField")
         .append("<div id='menu'></div>");
@@ -8,7 +12,7 @@
         .append("<h1>Casino MOTARO</h1>")
         .append("<img src='./img/motaro.png' />");
 
-    if (!isUserLogged()) {
+    if (!validate.isUserLogged()) {
         showLoginForm();
     }
 
@@ -30,22 +34,25 @@
         .append("<link rel='stylesheet' href='style/menu.css'>");
 
     $("#menu-item-one").on("click", function() {
-        if (!isUserLogged()) {
-            showErrorMessage(this, "You must login to play in our casino!");
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
         }
 
     });
 
     $("#menu-item-two").on("click", function() {
-        if (!isUserLogged()) {
-            showErrorMessage(this, "You must login to play in our casino!");
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
         }
 
     });
 
     $("#menu-item-three").on("click", function() {
-        if (!isUserLogged()) {
-            showErrorMessage(this, "You must login to play in our casino!");
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
         }
 
     });
@@ -73,7 +80,6 @@ function showErrorMessage(targetId, message) {
         .attr("data-target", "#errorMessage");
 
     let p = $("#menu").find("#errorMessage");
-
     if (!p.length) {
         $("#menu")
             .append(`<div class="modal fade" id="errorMessage" role="dialog">
@@ -92,12 +98,7 @@ function showErrorMessage(targetId, message) {
                             </div>
                         </div>
                     </div>`);
+    } else {
+        $("#menu .modal-body p").html(message);
     }
-}
-
-function isUserLogged() {
-
-    // TODO: Implement check user login status 
-
-    return false;
 }
