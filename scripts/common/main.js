@@ -31,21 +31,21 @@
 
     $("#menu-item-one").on("click", function() {
         if (!isUserLogged()) {
-            showErrorMessageNotLoggedUser();
+            showErrorMessage(this, "You must login to play in our casino!");
         }
 
     });
 
     $("#menu-item-two").on("click", function() {
         if (!isUserLogged()) {
-            showErrorMessageNotLoggedUser();
+            showErrorMessage(this, "You must login to play in our casino!");
         }
 
     });
 
     $("#menu-item-three").on("click", function() {
         if (!isUserLogged()) {
-            showErrorMessageNotLoggedUser();
+            showErrorMessage(this, "You must login to play in our casino!");
         }
 
     });
@@ -67,16 +67,8 @@ function showLoginForm() {
                     </form>`);
 }
 
-function showErrorMessageNotLoggedUser() {
-    $("#menu-item-one a")
-        .attr("data-toggle", "modal")
-        .attr("data-target", "#errorMessage");
-
-    $("#menu-item-two a")
-        .attr("data-toggle", "modal")
-        .attr("data-target", "#errorMessage");
-
-    $("#menu-item-three a")
+function showErrorMessage(targetId, message) {
+    $(targetId)
         .attr("data-toggle", "modal")
         .attr("data-target", "#errorMessage");
 
@@ -92,7 +84,7 @@ function showErrorMessageNotLoggedUser() {
                                     <h4 class="modal-title">Error</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>You must login to play in our casino!</p>
+                                    <p>${message}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
