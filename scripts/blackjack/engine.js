@@ -41,7 +41,12 @@ class Deck {
             }
         }
         shuffle(this.cards);
-        console.log(this.cards);
+        //console.log(this.cards);
+    }
+
+    draw() {
+        console.log(this.cards[0]);
+        this.cards.splice(0, 1);
     }
 }
 
@@ -65,3 +70,8 @@ function shuffle(array) {
 }
 
 var deckOfCards = new Deck();
+deckOfCards.draw();
+deckOfCards.draw();
+deckOfCards.draw();
+deckOfCards.draw();
+deckOfCards.draw();
