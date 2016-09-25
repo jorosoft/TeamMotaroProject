@@ -15,8 +15,8 @@ class Roulette{
     }
 }
 
-    function drawRoulette() {
-    var canvas = document.getElementById("wheelcanvas");
+      function drawRouletteWheel() {
+    var canvas = document.getElementById("rouletteCanvas");
     if (canvas.getContext) {
       var startAngle = 0;
       var arc = Math.PI / 19;
@@ -24,9 +24,13 @@ class Roulette{
       var textRadius = 175;
       var insideRadius = 125;
       var middleRadius = 145;
+      var canvasWidth = 400;
+      var canvasHeight = 400;
+      var xCoord = 250;
+      var yCoord = 250;
       var ctx = canvas.getContext("2d");
-      ctx.clearRect(0,0,400,400);
-
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      
       ctx.strokeStyle = "black";
       ctx.lineWidth = 10;
 
@@ -37,17 +41,17 @@ class Roulette{
         ctx.fillStyle = colors[i];
 
         ctx.beginPath();
-        ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
-        ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
-        ctx.arc(250, 250, middleRadius, angle + arc, angle, true);
+        ctx.arc(xCoord, yCoord, outsideRadius, angle, angle + arc, false);
+        ctx.arc(xCoord, yCoord, insideRadius, angle + arc, angle, true);
+        ctx.arc(xCoord, yCoord, middleRadius, angle + arc, angle, true);
 
         ctx.stroke();
         ctx.fill();
         ctx.save();
 
-        ctx.shadowColor   = "rgb(220,220,220)";
+        ctx.shadowColor = "gray";
         ctx.fillStyle = "white";
-        ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 250 + Math.sin(angle + arc / 2) * textRadius);
+        ctx.translate(xCoord + Math.cos(angle + arc / 2) * textRadius, yCoord + Math.sin(angle + arc / 2) * textRadius);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
         var text = numbers[i];
         ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
@@ -56,14 +60,14 @@ class Roulette{
 
       ctx.fillStyle = "white";
       ctx.beginPath();
-      ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
-      ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
-      ctx.lineTo(250 + 4, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 + 9, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 + 0, 250 - (outsideRadius - 13));
-      ctx.lineTo(250 - 9, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 - 4, 250 - (outsideRadius - 5));
-      ctx.lineTo(250 - 4, 250 - (outsideRadius + 5));
+      ctx.moveTo(xCoord - 4, yCoord - (outsideRadius + 5));
+      ctx.lineTo(xCoord + 4, yCoord - (outsideRadius + 5));
+      ctx.lineTo(xCoord + 4, yCoord - (outsideRadius - 5));
+      ctx.lineTo(xCoord + 9, yCoord - (outsideRadius - 5));
+      ctx.lineTo(xCoord + 0, yCoord - (outsideRadius - 13));
+      ctx.lineTo(xCoord - 9, yCoord - (outsideRadius - 5));
+      ctx.lineTo(xCoord - 4, yCoord - (outsideRadius - 5));
+      ctx.lineTo(xCoord - 4, yCoord - (outsideRadius + 5));
       ctx.fill();
     }
   }
