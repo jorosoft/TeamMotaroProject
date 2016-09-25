@@ -12,6 +12,8 @@ const slotOptionsImg = [
     "../img/slot-machine/seven.png"
 ];
 
+let gameStarted = false;
+
 export function loadGame() {
     $("#menu").find("ul").remove();
     $("#menu").append("<div id='slotMachine'></div>");
@@ -25,7 +27,11 @@ export function loadGame() {
 
 function startGame() {
     let isGameInProgress = $("#slotMachine").find("#slotOne").length !== 0;
-    if (!isGameInProgress) {
+    if (!gameStarted) {
+        if (isGameInProgress) {
+            endGame();
+        }
+        gameStarted = true;
         $("#slotMachine")
             .append("<div id='slotOne' class ='slot'><img /></div>")
             .append("<div id='slotTwo' class ='slot'><img /></div>")
@@ -34,15 +40,20 @@ function startGame() {
 
         let iterations = 0;
         let roll = setInterval(function() {
+            rollSlots();
             if (iterations === 30) {
                 if (engine.isWinner()) {
-                    $("#slotMachine #result").text("YOU WIN!");
+                    $("#slotMachine #result")
+                        .css("color", "blue")
+                        .text("YOU WIN!");
                 } else {
-                    $("#slotMachine #result").text("YOU LOSE!");
+                    $("#slotMachine #result")
+                        .css("color", "red")
+                        .text("YOU LOSE!");
                 }
                 clearInterval(roll);
+                gameStarted = false;
             }
-            rollSlots();
             iterations += 1;
         }, 100);
     }
@@ -56,4 +67,11 @@ function rollSlots() {
     $("#slotOne img").attr("src", slotOptionsImg[slotOne]);
     $("#slotTwo img").attr("src", slotOptionsImg[slotTwo]);
     $("#slotThree img").attr("src", slotOptionsImg[slotThree]);
+}
+
+function endGame() {
+    $("#slotMachine #slotOne").remove();
+    $("#slotMachine #slotTwo").remove();
+    $("#slotMachine #slotThree").remove();
+    $("#slotMachine #result").remove();
 }
