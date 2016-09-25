@@ -20,8 +20,40 @@ export function loadGame() {
         .append("<link rel='stylesheet' href='style/slot-machine.css'>")
         .append("<button id='startBtn' class='btn btn-success btn-small btn-block'>Start</button>");
 
-    $("#startBtn").on("click", function() {
-        alert("BAUUU!!");
+    $("#startBtn").on("click", startGame);
+}
 
-    });
+function startGame() {
+    let isGameInProgress = $("#slotMachine").find("#slotOne").length !== 0;
+    if (!isGameInProgress) {
+        $("#slotMachine")
+            .append("<div id='slotOne' class ='slot'><img /></div>")
+            .append("<div id='slotTwo' class ='slot'><img /></div>")
+            .append("<div id='slotThree' class ='slot'><img /></div>")
+            .append("<div id='result'></div>");
+
+        let iterations = 0;
+        let roll = setInterval(function() {
+            if (iterations === 30) {
+                if (engine.isWinner()) {
+                    $("#slotMachine #result").text("YOU WIN!");
+                } else {
+                    $("#slotMachine #result").text("YOU LOSE!");
+                }
+                clearInterval(roll);
+            }
+            rollSlots();
+            iterations += 1;
+        }, 100);
+    }
+}
+
+function rollSlots() {
+    let slotOne = engine.getNextValueForSlot(1);
+    let slotTwo = engine.getNextValueForSlot(2);
+    let slotThree = engine.getNextValueForSlot(3);
+
+    $("#slotOne img").attr("src", slotOptionsImg[slotOne]);
+    $("#slotTwo img").attr("src", slotOptionsImg[slotTwo]);
+    $("#slotThree img").attr("src", slotOptionsImg[slotThree]);
 }
