@@ -1,14 +1,18 @@
 // Casino start point
 
+import "jquery";
+import "bootstrap";
+import * as validate from "validator";
+
 (function showMenu() {
     $("#gameField")
         .append("<div id='menu'></div>");
 
     $("#menu")
         .append("<h1>Casino MOTARO</h1>")
-        .append("<img src='../img/motaro.png' />");
+        .append("<img src='./img/motaro.png' />");
 
-    if (!isUserLogged()) {
+    if (!validate.isUserLogged()) {
         showLoginForm();
     }
 
@@ -30,17 +34,26 @@
         .append("<link rel='stylesheet' href='style/menu.css'>");
 
     $("#menu-item-one").on("click", function() {
-        if (!isUserLogged()) {
-            showErrorMessageNotLoggedUser();
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
         }
 
     });
 
     $("#menu-item-two").on("click", function() {
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
+        }
 
     });
 
     $("#menu-item-three").on("click", function() {
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
+        }
 
     });
 }());
@@ -61,36 +74,31 @@ function showLoginForm() {
                     </form>`);
 }
 
-function showErrorMessageNotLoggedUser() {
-    //     $("#menu-item-one a")
-    //         .attr("data-toggle", "modal")
-    //         .attr("data-target", "#myModal")
-    //         .append(`<div class="modal fade" id="myModal" role="dialog">
-    //                     <div class="modal-dialog">
-    //                         <div class="modal-content">
-    //                             <div class="modal-header">
-    //                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-    //                                 <h4 class="modal-title">Error</h4>
-    //                             </div>
-    //                             <div class="modal-body">
-    //                                 <p>You must login to play in our casino!</p>
-    //                             </div>
-    //                             <div class="modal-footer">
-    //                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </div>`);
+function showErrorMessage(targetId, message) {
+    $(targetId)
+        .attr("data-toggle", "modal")
+        .attr("data-target", "#errorMessage");
 
-    //     $("#menu a").remove("#errorMessage");
-
-    alert("Opsaa");
-
-}
-
-function isUserLogged() {
-
-    // TODO: Implement check user login status 
-
-    return false;
+    let p = $("#menu").find("#errorMessage");
+    if (!p.length) {
+        $("#menu")
+            .append(`<div class="modal fade" id="errorMessage" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Error</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>${message}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`);
+    } else {
+        $("#menu .modal-body p").html(message);
+    }
 }
