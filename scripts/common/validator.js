@@ -1,15 +1,15 @@
 export function constants() {
     // Validation messages
-    const ERROR_MESSAGES = {
-        USER_NOT_LOGGED: "You must login to play in our casino!"
+    return {
+        USER_NOT_LOGGED_MESSAGE: "You must login to play in our casino!",
+        MIN_SLOT_OPTION_INDEX: 0,
+        MAX_SLOT_OPTION_INDEX: 6
     }
-
-    return ERROR_MESSAGES;
 }
 
 export function isUserLogged() {
 
     // TODO: Implement check user login status 
 
-    return false;
+    return true;
 }
