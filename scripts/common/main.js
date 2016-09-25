@@ -3,6 +3,7 @@
 import "jquery";
 import "bootstrap";
 import * as validate from "validator";
+import * as slotMachine from "slotMachine"
 
 (function showMenu() {
     $("#gameField")
@@ -32,30 +33,6 @@ import * as validate from "validator";
                     </li>
                 </ul>`)
         .append("<link rel='stylesheet' href='style/menu.css'>");
-
-    $("#menu-item-one").on("click", function() {
-        if (!validate.isUserLogged()) {
-            let targetId = "#" + $(this).attr("id");
-            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
-        }
-
-    });
-
-    $("#menu-item-two").on("click", function() {
-        if (!validate.isUserLogged()) {
-            let targetId = "#" + $(this).attr("id");
-            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
-        }
-
-    });
-
-    $("#menu-item-three").on("click", function() {
-        if (!validate.isUserLogged()) {
-            let targetId = "#" + $(this).attr("id");
-            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED);
-        }
-
-    });
 }());
 
 function showLoginForm() {
@@ -102,3 +79,29 @@ function showErrorMessage(targetId, message) {
         $("#menu .modal-body p").html(message);
     }
 }
+
+// Events
+$("#menu-item-one").on("click", function() {
+    if (!validate.isUserLogged()) {
+        let targetId = "#" + $(this).attr("id");
+        showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+    }
+
+});
+
+$("#menu-item-two").on("click", function() {
+    if (!validate.isUserLogged()) {
+        let targetId = "#" + $(this).attr("id");
+        showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+    }
+
+});
+
+$("#menu-item-three").on("click", function() {
+    if (!validate.isUserLogged()) {
+        let targetId = "#" + $(this).attr("id");
+        showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+    } else {
+        slotMachine.loadGame();
+    }
+});

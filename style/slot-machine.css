@@ -1,0 +1,14 @@
+#slotMachine {
+    width: 600px;
+    height: 370px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 5%;
+    background: url('../img/slot-machine/slot-machine.png') no-repeat;
+}
+
+#slotMachine button {
+    width: 100px;
+    height: 50px;
+    float: right;
+}
