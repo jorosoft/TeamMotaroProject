@@ -7,6 +7,15 @@ SystemJS.config({
         'bootstrap': '../lib/bootstrap.min.js',
         'main': '../scripts/common/main.js',
         'validator': '../scripts/common/validator.js',
+
+        'blackjack': '../scripts/blackjack/ui.js',
+        'blackjackEngine': '../scripts/blackjack/engine.js',
+        'blackjackModels': '../scripts/blackjack/models.js',
+
+        'roulette': '../scripts/roulette/ui.js',
+        'rouletteEngine': '../scripts/roulette/engine.js',
+        'rouletteModels': '../scripts/roulette/models.js',
+
         'slotMachine': '../scripts/slot-machine/ui.js',
         'slotMachineEngine': '../scripts/slot-machine/engine.js',
         'slotMachineModels': '../scripts/slot-machine/models.js'

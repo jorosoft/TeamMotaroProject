@@ -8,9 +8,16 @@
 }
 
 #slotMachine button {
-    width: 100px;
+    width: 120px;
     height: 50px;
     float: right;
+}
+
+#slotMachine #backBtn {
+    width: 120px;
+    position: relative;
+    top: 100px;
+    left: 20%;
 }
 
 .slot {

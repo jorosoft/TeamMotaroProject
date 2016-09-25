@@ -1,6 +1,7 @@
 // Game UI
 
 import * as engine from "slotMachineEngine";
+import * as main from "main";
 
 const slotOptionsImg = [
     "../img/slot-machine/bar.png",
@@ -20,9 +21,11 @@ export function loadGame() {
 
     $("#slotMachine")
         .append("<link rel='stylesheet' href='style/slot-machine.css'>")
-        .append("<button id='startBtn' class='btn btn-success btn-small btn-block'>Start</button>");
+        .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
+        .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>");
 
     $("#startBtn").on("click", startGame);
+    $("#backBtn").on("click", backToMenu);
 }
 
 function startGame() {
@@ -74,4 +77,11 @@ function endGame() {
     $("#slotMachine #slotTwo").remove();
     $("#slotMachine #slotThree").remove();
     $("#slotMachine #result").remove();
+}
+
+function backToMenu() {
+    if (!gameStarted) {
+        $("#slotMachine").remove();
+        main.showMenu();
+    }
 }
