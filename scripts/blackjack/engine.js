@@ -1,5 +1,7 @@
 // Game engine
 const NUMBER_OF_DECKS = 4;
+const CARD_IMAGE_HEIGHT = 98;
+const CARD_IMAGE_WIDTH = 64;
 
 var suite = {
     spades: 0,
@@ -25,8 +27,8 @@ var power = {
 };
 
 function getImageCoords(card) {
-    var y = suite[card.suite] * 98;
-    var x = power[card.power] * 64;
+    var y = suite[card.suite] * CARD_IMAGE_HEIGHT;
+    var x = power[card.power] * CARD_IMAGE_WIDTH;
     return [ y, x ];
 }
 
