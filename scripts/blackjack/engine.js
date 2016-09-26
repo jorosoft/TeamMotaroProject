@@ -37,14 +37,18 @@ export function loadGame() {
         .append("<button id='drawCardBtn' class='btn btn-success btn-block'>Draw Card</button>")
         .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>");
 
-    $("#drawCardBtn").on("click", player.drawCard(deckOfCards.getCard()));
+    $("#drawCardBtn").on("click", drawCard);
     $("#backBtn").on("click", backToMenu);
 
-    //player.drawCard(deckOfCards.getCard());
-    //player.drawCard(deckOfCards.getCard());
+    player.drawCard(deckOfCards.getCard());
+    player.drawCard(deckOfCards.getCard());
 
-    //dealer.drawCard(deckOfCards.getCard());
-    //dealer.drawCard(deckOfCards.getCard());
+    dealer.drawCard(deckOfCards.getCard());
+    dealer.drawCard(deckOfCards.getCard());
+}
+
+function drawCard() {
+    player.drawCard(deckOfCards.getCard());
 }
 
 function backToMenu() {
