@@ -3,7 +3,8 @@
 import "jquery";
 import "bootstrap";
 import * as validate from "validator";
-import * as slotMachine from "slotMachine"
+import * as slotMachine from "slotMachine";
+import * as blackjack from "blackjackEngine";
 
 showMenu();
 
@@ -42,6 +43,8 @@ export function showMenu() {
         if (!validate.isUserLogged()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+        } else {
+            blackjack.loadGame();
         }
 
     });

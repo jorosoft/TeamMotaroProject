@@ -1,4 +1,6 @@
 // Game engine
+import * as main from "main";
+
 const NUMBER_OF_DECKS = 4;
 const CARD_IMAGE_HEIGHT = 98;
 const CARD_IMAGE_WIDTH = 64;
@@ -25,6 +27,30 @@ var power = {
     Q: 11,
     K: 12
 };
+
+export function loadGame() {
+    $("#menu").find("ul").remove();
+    $("#menu").append("<div id='blackjack'></div>");
+
+    $("#blackjack")
+        //.append("<link rel='stylesheet' href='style/blackjack.css'>")
+        .append("<button id='drawCardBtn' class='btn btn-success btn-block'>Draw Card</button>")
+        .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>");
+
+    $("#drawCardBtn").on("click", player.drawCard(deckOfCards.getCard()));
+    $("#backBtn").on("click", backToMenu);
+
+    //player.drawCard(deckOfCards.getCard());
+    //player.drawCard(deckOfCards.getCard());
+
+    //dealer.drawCard(deckOfCards.getCard());
+    //dealer.drawCard(deckOfCards.getCard());
+}
+
+function backToMenu() {
+    $("#blackjack").remove();
+    main.showMenu();
+}
 
 function getImageCoords(card) {
     var y = suite[card.suite] * CARD_IMAGE_HEIGHT;
@@ -134,10 +160,4 @@ var player = new Player();
 var dealer = new Dealer();
 var deckOfCards = new Deck();
 
-player.drawCard(deckOfCards.getCard());
-player.drawCard(deckOfCards.getCard());
-
-dealer.drawCard(deckOfCards.getCard());
-dealer.drawCard(deckOfCards.getCard());
-
-getImageCoords(deckOfCards.getCard());
+//getImageCoords(deckOfCards.getCard());
