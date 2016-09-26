@@ -1,11 +1,13 @@
 // Game engine
-var NUMBER_OF_DECKS = 4;
+const NUMBER_OF_DECKS = 4;
+
 var suite = {
-    hearts: 1,
-    diamonds: 2,
-    clubs: 3,
-    spades: 4
+    spades: 0,
+    clubs: 1,
+    hearts: 2,
+    diamonds: 3
 };
+
 var power = {
     A: 1,
     2: 2,
@@ -17,10 +19,65 @@ var power = {
     8: 8,
     9: 9,
     10: 10,
-    J: 10,
-    Q: 10,
-    K: 10,
+    J: 11,
+    Q: 12,
+    K: 13
 };
+
+function getImageCoords(card) {
+    var y = suite[card.suite] * 98;
+    var x = power[card.power] * 64;
+    return [ y, x ];
+}
+
+class Participant {
+    constructor(name) {
+        this.cardsOnBoard = [];
+        this.score = 0;
+        this.aceCount = 0;
+        this.name = name
+    }
+
+    drawCard(card) {
+        this.cardsOnBoard.push(card);
+        var scoreToAdd = 0;
+        if (card.power == 'A') {
+            if (this.score + 11 > 21) {
+                scoreToAdd = 1;
+            } else {
+                scoreToAdd += 11;
+                this.aceCount++;
+            }
+        } else if (card.power === 'J' || card.power === 'Q' || card.power === 'K') {
+            scoreToAdd += 10;
+        } else {
+            scoreToAdd += parseInt(card.power);
+        }
+
+        if (this.score + scoreToAdd > 21) {
+            if (this.aceCount > 0) {
+                this.score -= 10;
+                this.aceCount--;
+            } else {
+                console.log('bust');
+            }
+        }
+        this.score += scoreToAdd;
+        console.log(this.name + ' ' + this.score);
+    }
+}
+
+class Player extends Participant {
+    constructor() {
+        super("player");
+    }
+}
+
+class Dealer extends Participant {
+    constructor() {
+        super("dealer");
+    }
+}
 
 class Card {
     constructor(suite, power) {
@@ -44,9 +101,11 @@ class Deck {
         //console.log(this.cards);
     }
 
-    draw() {
-        console.log(this.cards[0]);
+    getCard() {
+        console.log(this.cards[0]);        
+        var drawnCard = this.cards[0];
         this.cards.splice(0, 1);
+        return drawnCard;
     }
 }
 
@@ -69,9 +128,14 @@ function shuffle(array) {
   return array;
 }
 
+var player = new Player();
+var dealer = new Dealer();
 var deckOfCards = new Deck();
-deckOfCards.draw();
-deckOfCards.draw();
-deckOfCards.draw();
-deckOfCards.draw();
-deckOfCards.draw();
+
+player.drawCard(deckOfCards.getCard());
+player.drawCard(deckOfCards.getCard());
+
+dealer.drawCard(deckOfCards.getCard());
+dealer.drawCard(deckOfCards.getCard());
+
+getImageCoords(deckOfCards.getCard());
