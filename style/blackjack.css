@@ -1,0 +1,41 @@
+#menu {
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+
+#menu h1 {
+    font-family: "BackToBlack";
+    font-size: 42px;
+    text-align: center;
+    color: black;
+}
+
+#menu img {
+    margin-top: 2%;
+    margin-left: 2%;
+    float: left;
+}
+
+#blackjack {
+    width: 600px;
+    height: 350px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 5%;
+    background: url('../img/blackjackTable.jpg') no-repeat;
+    background-size: 480px 350px;
+}
+
+#blackjack button {
+    width: 120px;
+    height: 50px;
+    float: right;
+}
+
+#blackjack #backBtn {
+    width: 120px;
+    position: relative;
+    top: 100px;
+    left: 20%;
+}

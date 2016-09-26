@@ -4,7 +4,7 @@ import "jquery";
 import "bootstrap";
 import * as validate from "validator";
 import * as slotMachine from "slotMachine";
-import * as blackjack from "blackjackEngine";
+import * as blackjack from "blackjack";
 
 showMenu();
 
@@ -44,7 +44,6 @@ export function showMenu() {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
-            $("#menu").find("link").remove();
             blackjack.loadGame();
         }
 
@@ -63,7 +62,6 @@ export function showMenu() {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
-            $("#menu").find("link").remove();
             slotMachine.loadGame();
         }
     });
