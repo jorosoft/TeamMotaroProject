@@ -7,6 +7,7 @@ const CARD_IMAGE_HEIGHT = 98;
 const CARD_IMAGE_WIDTH = 75;
 
 var imageSprite = '../img/cards-sprite.png';
+var cardCount = 1;
 
 export function loadGame() {
     $("#menu").find("ul").remove();
@@ -53,11 +54,19 @@ export function loadGame() {
     
     function drawCard() {
         engine.drawCard();
+        cardCount++;
+        var cardNumber = 'card' + cardCount;
+        $("#blackjack").append("<div id='" + cardNumber + "' class ='card'><img /></div>");
+        $('#' + cardNumber).css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+        coords = models.getImageCoords(engine.getPlayerCard(cardCount));    
+        $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
+        $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
     }
 }
 
 function backToMenu() {
     engine.clear();
+    cardCount = 1;
     $("#blackjack").remove();
     main.showMenu();
 }
