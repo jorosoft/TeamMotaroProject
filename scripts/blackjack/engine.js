@@ -52,6 +52,9 @@ function drawCard() {
 }
 
 function backToMenu() {
+    player.score = 0;
+    dealer.score = 0;
+    console.clear();
     $("#blackjack").remove();
     main.showMenu();
 }
