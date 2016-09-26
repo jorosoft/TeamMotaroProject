@@ -44,6 +44,7 @@ export function showMenu() {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
+            $("#menu").find("link").remove();
             blackjack.loadGame();
         }
 
@@ -62,6 +63,7 @@ export function showMenu() {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
+            $("#menu").find("link").remove();
             slotMachine.loadGame();
         }
     });
