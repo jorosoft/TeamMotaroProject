@@ -3,6 +3,9 @@ import * as main from "main";
 import * as engine from "blackjackEngine";
 import * as models from "blackjackModels";
 
+const CARD_IMAGE_HEIGHT = 98;
+const CARD_IMAGE_WIDTH = 75;
+
 var imageSprite = '../img/cards-sprite.png';
 
 export function loadGame() {
@@ -24,14 +27,29 @@ export function loadGame() {
             .append("<div id='cardThree' class ='card'><img /></div>")
             .append("<div id='cardFour' class ='card'><img /></div>");
             
-    var coords = models.getImageCoords(engine.getPlayerCard(0));
-
-    $("#cardOne img").attr("src", imageSprite).css('width', 64).css('height', 98);
-    $("#cardOne img").attr("src", imageSprite);
+    $('#cardOne').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+    $('#cardTwo').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+    $('#cardThree').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+    $('#cardFour').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
     
-    $("#cardTwo img").attr("src", imageSprite).width('64px');
-    $("#cardThree img").attr("src", imageSprite).width('64px');
-    $("#cardFour img").attr("src", imageSprite).width('64px');
+    var coords;
+    coords = models.getImageCoords(engine.getPlayerCard(0));    
+    $("#cardOne img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
+    $("#cardOne img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+    coords = models.getImageCoords(engine.getPlayerCard(1));
+    $("#cardTwo img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
+    $("#cardTwo img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+
+    coords = models.getImageCoords(engine.getDealerCard(0));    
+    $("#cardThree img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
+    $("#cardThree img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+    coords = models.getImageCoords(engine.getDealerCard(1));
+    $("#cardFour img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
+    $("#cardFour img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+
+
+    $("#cardThree img").attr("src", imageSprite);
+    $("#cardFour img").attr("src", imageSprite);
     
     function drawCard() {
         engine.drawCard();

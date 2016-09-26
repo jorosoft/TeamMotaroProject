@@ -1,7 +1,7 @@
 // Game models
 const NUMBER_OF_DECKS = 4;
 const CARD_IMAGE_HEIGHT = 98;
-const CARD_IMAGE_WIDTH = 64;
+const CARD_IMAGE_WIDTH = 73;
 
 var suite = {
     spades: 0,

@@ -43,8 +43,18 @@
 .card {
     width: 70px;
     height: 100px;
+    margin-right: 5px;
     display: inline-block;
     position: relative;
     left: 50px;
     top: 200px;
+}
+
+#cardThree {
+    top: 20px;
+    left: -110px;
+}
+#cardFour {
+    top: 20px;
+    left: -110px;
 }

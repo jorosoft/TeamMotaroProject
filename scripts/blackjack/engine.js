@@ -15,12 +15,20 @@ export function drawCard() {
 
 export function clear() {
     player.score = 0;
+    player.cardsOnBoard = [];
+    player.aceCount = 0;
     dealer.score = 0;
+    dealer.cardsOnBoard = [];
+    dealer.aceCount = 0;
     console.clear();
 }
 
 export function getPlayerCard(index) {
     return player.cardsOnBoard[index];
+}
+
+export function getDealerCard(index) {
+    return dealer.cardsOnBoard[index];
 }
 
 var player = new models.Player();
