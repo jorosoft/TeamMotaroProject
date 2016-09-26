@@ -26,6 +26,12 @@ var power = {
     K: 12
 };
 
+export function getImageCoords(card) {
+    var y = suite[card.suite] * CARD_IMAGE_HEIGHT;
+    var x = power[card.power] * CARD_IMAGE_WIDTH;
+    return [ y, x ];
+}
+
 class Participant {
     constructor(name) {
         this.cardsOnBoard = [];

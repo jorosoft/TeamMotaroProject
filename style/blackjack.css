@@ -39,3 +39,12 @@
     top: 100px;
     left: 20%;
 }
+
+.card {
+    width: 70px;
+    height: 100px;
+    display: inline-block;
+    position: relative;
+    left: 50px;
+    top: 200px;
+}
