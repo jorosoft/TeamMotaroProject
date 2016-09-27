@@ -1,0 +1,25 @@
+#roulette {
+    width: 600px;
+    height: 400px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 5%;
+}
+
+#roulette button {
+    width: 120px;
+    height: 50px;
+    float: right;
+}
+
+#roulette #backBtn {
+    width: 120px;
+    position: relative;
+    top: 100px;
+    left: 20%;
+}
+
+#bettingfield {
+    width: 450px;
+    height: 250px;
+}
