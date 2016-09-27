@@ -3,15 +3,30 @@
 import "jquery";
 import "bootstrap";
 import * as validate from "validator";
-import * as slotMachine from "slotMachine"
+import * as slotMachine from "slotMachine";
+import * as blackjack from "blackjack";
+import * as models from "models";
 
-(function showMenu() {
-    $("#gameField")
-        .append("<div id='menu'></div>");
+var user = new models.User('Pesho');
+showMenu();
 
-    $("#menu")
-        .append("<h1>Casino MOTARO</h1>")
-        .append("<img src='./img/motaro.png' />");
+export function getUserMoney() {
+    return user.money;
+}
+
+export function setUserMoney(value) {
+    user.money = value;
+}
+
+export function showMenu() {
+    if ($("#gameField").find("#menu").length === 0) {
+        $("#gameField")
+            .append("<div id='menu'></div>");
+
+        $("#menu")
+            .append("<h1>Casino MOTARO</h1>")
+            .append("<img src='./img/motaro.png' />");
+    }
 
     if (!validate.isUserLogged()) {
         showLoginForm();
@@ -33,7 +48,34 @@ import * as slotMachine from "slotMachine"
                     </li>
                 </ul>`)
         .append("<link rel='stylesheet' href='style/menu.css'>");
-}());
+
+    $("#menu-item-one").on("click", function() {
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+        } else {
+            blackjack.loadGame();
+        }
+
+    });
+
+    $("#menu-item-two").on("click", function() {
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+        }
+
+    });
+
+    $("#menu-item-three").on("click", function() {
+        if (!validate.isUserLogged()) {
+            let targetId = "#" + $(this).attr("id");
+            showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+        } else {
+            slotMachine.loadGame();
+        }
+    });
+}
 
 function showLoginForm() {
     $("#menu")
@@ -79,29 +121,3 @@ function showErrorMessage(targetId, message) {
         $("#menu .modal-body p").html(message);
     }
 }
-
-// Events
-$("#menu-item-one").on("click", function() {
-    if (!validate.isUserLogged()) {
-        let targetId = "#" + $(this).attr("id");
-        showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
-    }
-
-});
-
-$("#menu-item-two").on("click", function() {
-    if (!validate.isUserLogged()) {
-        let targetId = "#" + $(this).attr("id");
-        showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
-    }
-
-});
-
-$("#menu-item-three").on("click", function() {
-    if (!validate.isUserLogged()) {
-        let targetId = "#" + $(this).attr("id");
-        showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
-    } else {
-        slotMachine.loadGame();
-    }
-});

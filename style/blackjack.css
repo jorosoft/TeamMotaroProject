@@ -1,0 +1,108 @@
+#menu {
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+
+#menu h1 {
+    font-family: "BackToBlack";
+    font-size: 42px;
+    text-align: center;
+    color: black;
+}
+
+#menu img {
+    margin-top: 2%;
+    margin-left: 2%;
+    float: left;
+}
+
+#blackjack {
+    width: 600px;
+    height: 350px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 5%;
+    background: url('../img/blackjackTable.jpg') no-repeat;
+    background-size: 480px 350px;
+}
+
+#blackjack #startGameBtn {
+    padding-left: 10px;
+}
+
+#blackjack button {
+    width: 120px;
+    height: 50px;
+    float: right;
+}
+
+#blackjack #backBtn {
+    width: 120px;
+    position: relative;
+    top: 100px;
+    left: 20%;
+}
+
+#blackjack #drawCardBtn {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    top: 280px;
+    left: 30%;
+}
+
+#blackjack #standBtn {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    top: 310px;
+    left: 40%;
+}
+
+#dealerField {
+    width: 450px;
+    position: absolute;
+    top: 200px;
+    left: 600px;
+}
+
+#playerField {
+    width: 450px;
+    position: absolute;
+    top: 380px;
+    left: 600px;
+}
+
+#blackjack #message {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    top: 300px;
+    left: 600px;
+}
+
+.card {
+    width: 70px;
+    height: 100px;
+    margin-right: -15px;
+    display: inline-block;
+    position: relative;
+}
+
+.drawnCard {
+    width: 70px;
+    height: 100px;
+    margin-right: -15px;
+    display: inline-block;
+    position: relative;
+}
+
+.drawnDealerCard {
+    width: 70px;
+    height: 100px;
+    margin-right: -15px;
+    display: inline-block;
+    position: relative;
+}

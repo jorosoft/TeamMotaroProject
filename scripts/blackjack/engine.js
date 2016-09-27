@@ -1,77 +1,47 @@
 // Game engine
-var NUMBER_OF_DECKS = 4;
-var suite = {
-    hearts: 1,
-    diamonds: 2,
-    clubs: 3,
-    spades: 4
-};
-var power = {
-    A: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 7,
-    8: 8,
-    9: 9,
-    10: 10,
-    J: 10,
-    Q: 10,
-    K: 10,
-};
+import * as models from 'blackjackModels';
 
-class Card {
-    constructor(suite, power) {
-        this.suite = suite;
-        this.power = power;
-    }
+export function startGame() {
+    player.drawCard(deckOfCards.getCard());
+    dealer.drawCard(deckOfCards.getCard());
+    player.drawCard(deckOfCards.getCard());
+    dealer.drawCard(deckOfCards.getCard());
 }
 
-class Deck {
-    constructor() {
-        this.cards = [];
-        for (var i = 0; i < NUMBER_OF_DECKS; i++) {
-            for (var sui in suite) {
-                for (var pow in power) {
-                    var currCard = new Card(sui, pow);
-                    this.cards.push(currCard);
-                }
-            }
-        }
-        shuffle(this.cards);
-        //console.log(this.cards);
-    }
-
-    draw() {
-        console.log(this.cards[0]);
-        this.cards.splice(0, 1);
-    }
+export function drawCard() {
+    player.drawCard(deckOfCards.getCard());    
 }
 
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
+export function dealerDraw() {
+    dealer.drawCard(deckOfCards.getCard());
 }
 
-var deckOfCards = new Deck();
-deckOfCards.draw();
-deckOfCards.draw();
-deckOfCards.draw();
-deckOfCards.draw();
-deckOfCards.draw();
+export function clear() {
+    player.score = 0;
+    player.cardsOnBoard = [];
+    player.aceCount = 0;
+    dealer.score = 0;
+    dealer.cardsOnBoard = [];
+    dealer.aceCount = 0;
+    console.clear();
+}
+
+export function getPlayerCard(index) {
+    return player.cardsOnBoard[index];
+}
+
+export function getDealerCard(index) {
+    return dealer.cardsOnBoard[index];
+}
+
+export function getPlayerScore() {
+    return player.score;
+}
+
+export function getDealerScore() {
+    return dealer.score;
+}
+
+var player = new models.Player();
+var dealer = new models.Dealer();
+var deckOfCards = new models.Deck();
