@@ -1,6 +1,7 @@
 // Casino start point
 
 import "jquery";
+import "jqueryUI";
 import "bootstrap";
 import * as validate from "validator";
 import * as slotMachine from "slotMachine";

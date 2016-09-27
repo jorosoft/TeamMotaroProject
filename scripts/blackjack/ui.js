@@ -40,12 +40,12 @@ export function loadGame() {
     $("#standBtn").on("click", stand);
     $("#backBtn").on("click", backToMenu);
 
-    $("#dealerField")    
-            .append("<div id='dealerCardZero' class ='card'><img /></div>")
-            .append("<div id='dealerCardOne' class ='card'><img /></div>");
+    $("#dealerField")
+        .append("<div id='dealerCardZero' class ='card'><img /></div>")
+        .append("<div id='dealerCardOne' class ='card'><img /></div>");
     $("#playerField")
-            .append("<div id='playerCardZero' class ='card'><img /></div>")
-            .append("<div id='playerCardOne' class ='card'><img /></div>");
+        .append("<div id='playerCardZero' class ='card'><img /></div>")
+        .append("<div id='playerCardOne' class ='card'><img /></div>");
 
     $("#blackjack").append("<div id='message'></div>");
 }
@@ -99,9 +99,13 @@ function stand() {
         cardNumber = 'dealerCard' + dealerCount;
         $("#dealerField").append("<div id='" + cardNumber + "' class ='drawnDealerCard'><img /></div>");
         $('#' + cardNumber).css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
-        coords = models.getImageCoords(engine.getDealerCard(dealerCount));    
+        coords = models.getImageCoords(engine.getDealerCard(dealerCount));
         $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
         $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+        $('#' + cardNumber).css('display', 'none')
+            .show("slide", {
+                direction: "left"
+            });
         if (engine.getDealerScore() > 21) {
             $("#message").html('You win!');
             $("#message").css('color', 'LightGreen');
@@ -116,7 +120,7 @@ function stand() {
             $("#message").html('Blackjack!');
             $("#message").css('color', 'LightCoral');
             $('#drawCardBtn').attr('disabled', 'disabled');
-            window.setTimeout(stand, 1000)            
+            window.setTimeout(stand, 1000)
         } else {
             window.setTimeout(stand, 1000)
         }
@@ -132,7 +136,7 @@ function compareScore() {
         return -1;
     }
 }
-    
+
 function drawCard() {
     engine.drawCard();
     cardCount++;
@@ -142,11 +146,16 @@ function drawCard() {
         .css('width', CARD_IMAGE_WIDTH)
         .css('height', CARD_IMAGE_HEIGHT)
         .css('overflow', 'hidden');
-    coords = models.getImageCoords(engine.getPlayerCard(cardCount));    
+    coords = models.getImageCoords(engine.getPlayerCard(cardCount));
     $('#' + cardNumber + " img")
         .attr("src", imageSprite)
         .css('margin-top', (coords[0] * -1))
         .css('margin-left', (coords[1] * -1));
+    $('#' + cardNumber)
+        .css('display', 'none')
+        .show("slide", {
+            direction: "left"
+        });
     //$('#' + cardNumber + " img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
     if (engine.getPlayerScore() > 21) {
         $("#message").html('Bust!');
@@ -185,36 +194,54 @@ function startGame() {
     $('#dealerCardOne').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
     $('#playerCardZero').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
     $('#playerCardOne').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
-        
+
     window.setTimeout(drawFirstCard, 1000);
 
     function drawFirstCard() {
-        coords = models.getImageCoords(engine.getPlayerCard(0));    
+        coords = models.getImageCoords(engine.getPlayerCard(0));
         $("#playerCardZero img")
             .attr("src", imageSprite)
             .css('margin-top', (coords[0] * -1))
             .css('margin-left', (coords[1] * -1));
+        $("#playerCardZero")
+            .css('display', 'none')
+            .show("slide", {
+                direction: "left"
+            });
         //$("#playerCardZero img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
         window.setTimeout(drawSecondCard, 1000);
     }
+
     function drawSecondCard() {
-        coords = models.getImageCoords(engine.getDealerCard(0));    
+        coords = models.getImageCoords(engine.getDealerCard(0));
         $("#dealerCardZero img")
             .attr("src", imageSprite)
             .css('margin-top', (coords[0] * -1))
             .css('margin-left', (coords[1] * -1));
+        $("#dealerCardZero")
+            .css('display', 'none')
+            .show("slide", {
+                direction: "left"
+            });
         //$("#dealerCardZero img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
         window.setTimeout(drawThirdCard, 1000);
     }
+
     function drawThirdCard() {
         coords = models.getImageCoords(engine.getPlayerCard(1));
         $("#playerCardOne img")
             .attr("src", imageSprite)
             .css('margin-top', (coords[0] * -1))
             .css('margin-left', (coords[1] * -1));
+        $("#playerCardOne")
+            .css('display', 'none')
+            .show("slide", {
+                direction: "left"
+            });
         //$("#playerCardOne img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
         window.setTimeout(drawFourthCard, 1000);
     }
+
     function drawFourthCard() {
         coords = models.getImageCoords(engine.getDealerCard(1));
         $("#dealerCardOne img")
@@ -223,6 +250,11 @@ function startGame() {
             .css('width', CARD_IMAGE_WIDTH)
             .css('margin-top', '')
             .css('margin-left', '');
+        $("#dealerCardOne")
+            .css('display', 'none')
+            .show("slide", {
+                direction: "left"
+            });
         $('#drawCardBtn').attr('disabled', false);
         $('#standBtn').attr('disabled', false);
 
@@ -231,7 +263,7 @@ function startGame() {
             $("#message").html('Blackjack!');
             $("#message").css('color', 'LightGreen');
         }
-    }    
+    }
 }
 
 function backToMenu() {

@@ -6,6 +6,7 @@ SystemJS.config({
         'jquery': '../lib/jquery-3.1.0.min.js',
         'bootstrap': '../lib/bootstrap.min.js',
         'firebase': '../lib/firebase.js',
+        'jqueryUI': '../lib/jquery-ui.min.js',
         'main': '../scripts/common/main.js',
         'validator': '../scripts/common/validator.js',
         'models': '../scripts/common/models.js',
