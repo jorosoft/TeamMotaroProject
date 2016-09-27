@@ -31,6 +31,14 @@ export function getDealerCard(index) {
     return dealer.cardsOnBoard[index];
 }
 
+export function getPlayerScore() {
+    return player.score;
+}
+
+export function getDealerScore() {
+    return dealer.score;
+}
+
 var player = new models.Player();
 var dealer = new models.Dealer();
 var deckOfCards = new models.Deck();

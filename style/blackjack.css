@@ -40,21 +40,48 @@
     left: 20%;
 }
 
+#blackjack #drawCardBtn {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    top: 280px;
+    left: 30%;
+}
+
+#blackjack #standBtn {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    top: 310px;
+    left: 40%;
+}
+
+#dealerField {
+    width: 450px;
+    position: absolute;
+    top: 180px;
+    left: 520px;
+}
+
+#playerField {
+    width: 450px;
+    position: absolute;
+    top: 360px;
+    left: 520px;
+}
+
 .card {
     width: 70px;
     height: 100px;
     margin-right: 5px;
     display: inline-block;
     position: relative;
-    left: 50px;
-    top: 200px;
 }
 
-#cardThree {
-    top: 20px;
-    left: -110px;
-}
-#cardFour {
-    top: 20px;
-    left: -110px;
+.drawnCard {
+    width: 70px;
+    height: 100px;
+    margin-right: 5px;
+    display: inline-block;
+    position: relative;
 }
