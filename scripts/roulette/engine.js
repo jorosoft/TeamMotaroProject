@@ -15,7 +15,7 @@ class Roulette{
     }
 }
 
-      function drawRouletteWheel() {
+    function drawRouletteWheel() {
     var canvas = document.getElementById("rouletteCanvas");
     if (canvas.getContext) {
       var startAngle = 0;
