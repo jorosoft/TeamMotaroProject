@@ -3,14 +3,17 @@ import * as models from 'blackjackModels';
 
 export function startGame() {
     player.drawCard(deckOfCards.getCard());
-    player.drawCard(deckOfCards.getCard());
-
     dealer.drawCard(deckOfCards.getCard());
+    player.drawCard(deckOfCards.getCard());
     dealer.drawCard(deckOfCards.getCard());
 }
 
 export function drawCard() {
     player.drawCard(deckOfCards.getCard());    
+}
+
+export function dealerDraw() {
+    dealer.drawCard(deckOfCards.getCard());
 }
 
 export function clear() {

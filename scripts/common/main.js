@@ -5,8 +5,18 @@ import "bootstrap";
 import * as validate from "validator";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
+import * as models from "models";
 
+var user = new models.User('Pesho');
 showMenu();
+
+export function getUserMoney() {
+    return user.money;
+}
+
+export function setUserMoney(value) {
+    user.money = value;
+}
 
 export function showMenu() {
     if ($("#gameField").find("#menu").length === 0) {

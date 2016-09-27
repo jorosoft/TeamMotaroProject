@@ -8,6 +8,7 @@ SystemJS.config({
         'firebase': '../lib/firebase.js',
         'main': '../scripts/common/main.js',
         'validator': '../scripts/common/validator.js',
+        'models': '../scripts/common/models.js',
 
         'blackjack': '../scripts/blackjack/ui.js',
         'blackjackEngine': '../scripts/blackjack/engine.js',
