@@ -1,9 +1,10 @@
 #roulette {
-    width: 600px;
+    width: 400px;
     height: 400px;
     float: right;
     margin-top: 4%;
     margin-right: 5%;
+    /*background: */
 }
 
 #roulette button {
@@ -19,7 +20,14 @@
     left: 20%;
 }
 
-#bettingfield {
-    width: 450px;
+#roulette #spinBtn {
+    width: 120px;
+    position: relative;
+    top: 200px;
+    left: 20%;
+}
+
+#bettingField {
+    width: 400px;
     height: 250px;
 }
