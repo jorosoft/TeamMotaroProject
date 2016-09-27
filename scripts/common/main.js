@@ -25,7 +25,8 @@ export function showMenu() {
 
         $("#menu")
             .append("<h1>Casino MOTARO</h1>")
-            .append("<img src='./img/motaro.png' />");
+            .append("<img src='./img/motaro.png' />")
+            .append("<link rel='stylesheet' href='style/menu.css'>");
     }
 
     if (!validate.isUserLogged()) {
@@ -46,8 +47,7 @@ export function showMenu() {
                         <a href="#"></a>
                         Slot Machine
                     </li>
-                </ul>`)
-        .append("<link rel='stylesheet' href='style/menu.css'>");
+                </ul>`);
 
     $("#menu-item-one").on("click", function() {
         if (!validate.isUserLogged()) {
