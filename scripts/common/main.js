@@ -6,6 +6,7 @@ import "bootstrap";
 import * as validate from "validator";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
+import * as roulette from "roulette";
 import * as models from "models";
 
 var user = new models.User('Pesho');
