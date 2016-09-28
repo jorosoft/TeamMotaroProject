@@ -32,8 +32,9 @@ export function loadGame() {
         .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
         .append("<button id='drawCardBtn' class='btn btn-default btn-small btn-block' disabled>Hit</button>")
         .append("<button id='standBtn' class='btn btn-default btn-small btn-block' disabled>Stand</button>")
-        .append("<div id='playerField'></div>")
-        .append("<div id='dealerField'></div>");
+        .append("<div id='dealerField'></div>")
+        .append("<div id='message'></div>")
+        .append("<div id='playerField'></div>");
 
     $("#startGameBtn").on("click", startGame);
     $("#drawCardBtn").on("click", drawCard);
@@ -46,8 +47,6 @@ export function loadGame() {
     $("#playerField")
         .append("<div id='playerCardZero' class ='card'><img /></div>")
         .append("<div id='playerCardOne' class ='card'><img /></div>");
-
-    $("#blackjack").append("<div id='message'></div>");
 }
 
 function stand() {
