@@ -120,91 +120,88 @@ var winnings = '';
           break;
     }
 
-    if(color === 'red' && selection==='red'){
+    if(color === 'red' && selection === 'red'){
       smallWin()
     }
 
-    if(color === 'black' && selection==='red'){
+    if(color === 'black' && selection === 'red'){
       loser()
     }
 
-    if(color == 'black' && selection=='black'){
+    if(color === 'black' && selection === 'black'){
       smallWin();
     }
 
-    if(color == 'red' && selection=='black'){
+    if(color === 'red' && selection === 'black'){
       loser();
     }
 
-    if(color =='green' && (selection== 'red' || selection== 'black')){
+    if(color === 'green' && (selection== 'red' || selection === 'black')){
       loser();
     }
 
-    if(selection == 'block1' && (parseInt(text)<13 && parseInt(text)>0)){
+    if(selection === 'block1' && (parseInt(text) < 13 && parseInt(text) > 0)){
       midWin();
     }
 
-    if(selection == 'block1' && (parseInt(text)>=13 || color=='green')){
+    if(selection === 'block1' && (parseInt(text) >= 13 || color === 'green')){
       loser();
     }
 
-    if(selection == 'block2' && (parseInt(text)>=13 && parseInt(text)<25)){
+    if(selection === 'block2' && (parseInt(text) >= 13 && parseInt(text) < 25)){
       midWin();
     }
 
-    if(selection == 'block2' && (parseInt(text)<13 || parseInt(text)>24 || color=='green')){
+    if(selection === 'block2' && (parseInt(text) <13 || parseInt(text) > 24 || color=='green')){
       loser();
     }
 
-    if(selection == 'block3' && (parseInt(text)>=26 && parseInt(text)<37)){
+    if(selection === 'block3' && (parseInt(text) >= 26 && parseInt(text) < 37)){
       midWin();
     }
 
-    if(selection == 'block3' && (parseInt(text)<25 || color=='green')){
+    if(selection === 'block3' && (parseInt(text) < 25 || color === 'green')){
       loser();
     }
 
-    if(selection == 'even' && (parseInt(text)%2==0 && (text!= ('0' || '00')))){
+    if(selection === 'even' && (parseInt(text) % 2 === 0 && (text!= ('0' || '00')))){
       smallWin();
     }
 
-    if(selection == 'even' && (parseInt(text)%2 != 0)){
+    if(selection === 'even' && (parseInt(text) % 2 !== 0)){
       loser();
     }
 
-    if(selection == 'odd' && (parseInt(text)%2 != 0)){
+    if(selection === 'odd' && (parseInt(text) % 2 !== 0)){
       smallWin();
     }
 
-    if(selection == 'odd' && (parseInt(text)%2==0 && (text!= ('0' || '00')))){
+    if(selection == 'odd' && (parseInt(text) % 2 === 0 && (text !== ('0' || '00')))){
       loser();
     }
 
-    if(selection == 'firstHalf' && (parseInt(text)<19 && (text!= ('0' || '00')))){
+    if(selection === 'firstHalf' && (parseInt(text) < 19 && (text !== ('0' || '00')))){
       smallWin();
     }
 
-    if(selection == 'firstHalf' && (parseInt(text)>=19)){
+    if(selection === 'firstHalf' && (parseInt(text) >= 19)){
       loser();
     }
 
-    if(selection == 'secondHalf' && (parseInt(text)>18 && (text!= ('0' || '00')))){
+    if(selection === 'secondHalf' && (parseInt(text) > 18 && (text !== ('0' || '00')))){
       smallWin();
     }
 
-    if(selection == 'secondHalf' && (parseInt(text)<=18)){
+    if(selection === 'secondHalf' && (parseInt(text) <= 18)){
       loser();
     }
 
-    if(selection == text){
-      var bet = document.getElementById('bet').value;
-      answer.innerHTML='Big win!'
-      var winnings = parseInt(bet)*35;
-      account+=winnings;
-      balance.innerHTML= account
+    if(selection === text){
+    $("#message").html('Big win!');
+    money = main.getUserMoney() + 35 * BET_COST;
     }
 
-    if(selection == 'row1'){
+    if(selection === 'row1'){
       switch(text) {
         case '3':
         case '6':
@@ -221,14 +218,14 @@ var winnings = '';
           var row = 'row1';
         break;
       }
-      if(row == 'row1'){
+      if(row === 'row1'){
         midWin();
       } else {
           loser();
         }
     }
 
-    if(selection == 'row2'){
+    if(selection === 'row2'){
       switch(text) {
         case '2':
         case '5':
@@ -245,14 +242,14 @@ var winnings = '';
           var row = 'row2';
         break;
       }
-      if(row == 'row2'){
+      if(row === 'row2'){
         midWin();
       } else {
           loser();
         }
     }
 
-    if(selection == 'row3'){
+    if(selection === 'row3'){
       switch(text) {
         case '1':
         case '4':
@@ -269,7 +266,7 @@ var winnings = '';
           var row = 'row3';
         break;
       }
-        if(row =='row3'){
+        if(row === 'row3'){
           midWin();
         } else {
             loser();
@@ -317,7 +314,7 @@ var winnings = '';
       case '31':
       case '0':
       case '00':
-        if(selection!=text){
+        if(selection !== text){
           loser();
         }
       break;
