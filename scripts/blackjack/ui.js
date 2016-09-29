@@ -66,7 +66,7 @@ function stand() {
         $('#standBtn').attr('disabled', 'disabled');
         $('#startGameBtn').attr('disabled', false);
         return;
-    } else if (compareScore() == 0 && engine.getDealerScore() >= DEALER_STAND) {
+    } else if (compareScore() === 0 && engine.getDealerScore() >= DEALER_STAND) {
         $("#message").html('Draw!');
         $("#message").css('color', 'LightGreen');
         $('#drawCardBtn').attr('disabled', 'disabled');
@@ -76,7 +76,7 @@ function stand() {
         main.setUserMoney(money);
         bet = 0;
         return;
-    } else if (compareScore() == 0 && engine.getDealerScore() < DEALER_STAND) {
+    } else if (compareScore() === 0 && engine.getDealerScore() < DEALER_STAND) {
         dealerDraw();
     } else if (compareScore() > 0 && engine.getDealerScore() < DEALER_STAND) {
         dealerDraw();
@@ -119,9 +119,9 @@ function stand() {
             $("#message").html('Blackjack!');
             $("#message").css('color', 'LightCoral');
             $('#drawCardBtn').attr('disabled', 'disabled');
-            window.setTimeout(stand, 1000)
+            window.setTimeout(stand, 1000);
         } else {
-            window.setTimeout(stand, 1000)
+            window.setTimeout(stand, 1000);
         }
     }
 }
@@ -180,7 +180,7 @@ function startGame() {
     bet = GAME_COST;
     main.setUserMoney(money);
     engine.clear();
-    cardCountReset()
+    cardCountReset();
     engine.startGame();
     $('#startGameBtn').attr('disabled', 'disabled');
     $("#dealerField").find('.drawnDealerCard').remove();
@@ -267,7 +267,7 @@ function startGame() {
 
 function backToMenu() {
     engine.clear();
-    cardCountReset()
+    cardCountReset();
     $("#blackjack").remove();
     main.showMenu();
 }
