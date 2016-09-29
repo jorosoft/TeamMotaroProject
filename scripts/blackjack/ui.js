@@ -7,6 +7,7 @@ const CARD_IMAGE_HEIGHT = 98;
 const CARD_IMAGE_WIDTH = 75;
 const GAME_COST = 5;
 const DEALER_STAND = 17;
+const DELAY = 500;
 
 var imageSprite = '../img/cards-sprite.png',
     imageCardBack = '../img/cardBack.jpg',
@@ -119,9 +120,9 @@ function stand() {
             $("#message").html('Blackjack!');
             $("#message").css('color', 'LightCoral');
             $('#drawCardBtn').attr('disabled', 'disabled');
-            window.setTimeout(stand, 1000);
+            window.setTimeout(stand, DELAY);
         } else {
-            window.setTimeout(stand, 1000);
+            window.setTimeout(stand, DELAY);
         }
     }
 }
@@ -194,7 +195,7 @@ function startGame() {
     $('#playerCardZero').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
     $('#playerCardOne').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
 
-    window.setTimeout(drawFirstCard, 1000);
+    window.setTimeout(drawFirstCard, DELAY);
 
     function drawFirstCard() {
         coords = models.getImageCoords(engine.getPlayerCard(0));
@@ -208,7 +209,7 @@ function startGame() {
                 direction: "left"
             });
         //$("#playerCardZero img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
-        window.setTimeout(drawSecondCard, 1000);
+        window.setTimeout(drawSecondCard, DELAY);
     }
 
     function drawSecondCard() {
@@ -223,7 +224,7 @@ function startGame() {
                 direction: "left"
             });
         //$("#dealerCardZero img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
-        window.setTimeout(drawThirdCard, 1000);
+        window.setTimeout(drawThirdCard, DELAY);
     }
 
     function drawThirdCard() {
@@ -238,7 +239,7 @@ function startGame() {
                 direction: "left"
             });
         //$("#playerCardOne img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
-        window.setTimeout(drawFourthCard, 1000);
+        window.setTimeout(drawFourthCard, DELAY);
     }
 
     function drawFourthCard() {
