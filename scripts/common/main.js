@@ -65,6 +65,8 @@ export function showMenu() {
         if (!validate.isUserLogged()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
+        }else{
+            roulette.loadGame();
         }
 
     });
