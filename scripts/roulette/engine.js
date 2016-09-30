@@ -114,4 +114,4 @@ var colors = ['#c10000', "black",'#c10000', "black",'#c10000', "black",'#c10000'
     return b+c*(tc + -3*ts + 3*t);
   }
 
-  drawRouletteWheel();
+  // drawRouletteWheel();
