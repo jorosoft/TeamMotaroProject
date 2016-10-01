@@ -48,6 +48,7 @@ function bettingResult() {
   //The betting field needs implementation, this is not tested
   var selection = '';
   $("#table").on('click', 'td', function() { 
+     alert($(this).text());
      selection = $(this).text()
 });
 
@@ -324,6 +325,6 @@ function loser() {
 // }
 
 function backToMenu() {
-      $("#slotMachine").remove();
+      $("#roulette").remove();
       main.showMenu();
 }
