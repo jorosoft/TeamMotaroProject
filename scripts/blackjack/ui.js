@@ -127,6 +127,7 @@ function drawCard() {
             $("#message").css('color', 'LightCoral');
             $('#standBtn').attr('disabled', 'disabled');
             $('#startGameBtn').attr('disabled', false);
+            $('#backBtn').attr('disabled', false);
         }, DELAY);        
     } else if (engine.getPlayerScore() === 21) {
         window.setTimeout(function() {
