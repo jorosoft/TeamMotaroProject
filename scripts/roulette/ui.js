@@ -5,7 +5,8 @@ import * as main from "main";
 const BET_COST = 5;
 
 var money,
-  bet;
+  bet,
+  gameStarted = false;
 
 export function loadGame() {
   $("#menu").find("ul").remove();
@@ -17,8 +18,8 @@ export function loadGame() {
     .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
     .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
     .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
-    .append("<div id='bettingField'></div>")
-    .append("<canvas id='canvas' width='500' height='400'></canvas>")
+    .append("<div id='bettingField'><canvas id='canvas' width='500' height='400'></canvas></div>")
+    //.append("<canvas id='canvas' width='500' height='400'></canvas>")
     .append("<div id='message'></div>");
 
   $("#startBtn").on("click", startGame);
@@ -324,5 +325,7 @@ function result() {
 }
 
 function backToMenu() {
-
+  
+    $("#roulette").remove();
+    main.showMenu();
 }
