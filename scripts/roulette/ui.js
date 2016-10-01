@@ -5,7 +5,8 @@ import * as main from "main";
 const BET_COST = 5;
 
 var money,
-  bet;
+    bet,
+    selection;
 
 export function loadGame() {
   $("#menu").find("ul").remove();
@@ -24,6 +25,10 @@ export function loadGame() {
   $("#startBtn").on("click", startGame);
   $("#backBtn").on("click", backToMenu);
   $("#spinBtn").on("click", spin);
+  $("#table").on('click', 'td', function() { 
+     alert($(this).text());
+     selection = $(this).text()
+});
 }
 
 function startGame() {
@@ -45,12 +50,6 @@ function spin() {
 }
 
 function bettingResult() {
-  //The betting field needs implementation, this is not tested
-  var selection = '';
-  $("#table").on('click', 'td', function() { 
-     alert($(this).text());
-     selection = $(this).text()
-});
 
 }
 
