@@ -47,7 +47,6 @@ function startGame() {
 
 function spin() {
     engine.spin();
-
 }
 
 function bettingResult() {

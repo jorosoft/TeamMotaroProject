@@ -1,3 +1,5 @@
+import * as models from "rouletteModels";
+
 var colors = ['#c10000', "black", '#c10000', "black", '#c10000', "black", '#c10000', "black",
   '#c10000', "black", '#c10000', "black", '#c10000', "black", '#c10000', "black", '#c10000',
   "black", '#30e708', 'black', "#c10000", 'black', "#c10000", 'black', "#c10000", 'black', "#c10000",
