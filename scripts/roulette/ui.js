@@ -5,13 +5,8 @@ import * as main from "main";
 const BET_COST = 5;
 
 var money,
-<<<<<<< HEAD
-  bet,
-  gameStarted = false;
-=======
     bet,
     selection;
->>>>>>> 6a6a293f6fd9818b3fb618cc3f5fd61a6260791e
 
 export function loadGame() {
   $("#menu").find("ul").remove();
@@ -23,13 +18,8 @@ export function loadGame() {
     .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
     .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
     .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
-<<<<<<< HEAD
-    .append("<div id='bettingField'><canvas id='canvas' width='500' height='400'></canvas></div>")
-    //.append("<canvas id='canvas' width='500' height='400'></canvas>")
-=======
     .append("<div id='bettingField'><table id='table'><tr><td>Red</td><td>Black</td></tr><tr><td>Odd</td><td>Even</td></tr></table></div>")
     .append("<canvas id='canvas' width='500' height='400'></canvas>")
->>>>>>> 6a6a293f6fd9818b3fb618cc3f5fd61a6260791e
     .append("<div id='message'></div>");
 
   $("#startBtn").on("click", startGame);
@@ -334,12 +324,6 @@ function loser() {
 // }
 
 function backToMenu() {
-<<<<<<< HEAD
-  
     $("#roulette").remove();
     main.showMenu();
-=======
-      $("#roulette").remove();
-      main.showMenu();
->>>>>>> 6a6a293f6fd9818b3fb618cc3f5fd61a6260791e
 }
