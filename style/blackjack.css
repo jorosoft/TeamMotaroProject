@@ -64,12 +64,12 @@
     width: 360px;
     height: 100px;
     position: relative;
-    top: 30px;
     left: 5%;
 }
 
 #playerField {
     width: 360px;
+    height: 100px;
     position: relative;
     top: 60px;
     left: 5%;
@@ -82,8 +82,22 @@
     font-weight: bold;
     text-align: center;
     position: relative;
-    top: 45px;
+    top: 20px;
     left: 20%;
+}
+
+#blackjack #playerScore {
+    font-size: 20px;
+    color: dodgerblue;
+    position: relative;
+    bottom: -20%;
+}
+
+#blackjack #dealerScore {
+    font-size: 20px;
+    color: orangered;
+    position: relative;
+    top: -7%;
 }
 
 .card {

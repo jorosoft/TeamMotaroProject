@@ -60,12 +60,9 @@ class Participant {
             if (this.aceCount > 0) {
                 this.score -= 10;
                 this.aceCount--;
-            } else {
-                console.log('bust');
             }
         }
         this.score += scoreToAdd;
-        console.log(this.name + ' ' + this.score);
     }
 }
 
@@ -103,8 +100,7 @@ export class Deck {
         //console.log(this.cards);
     }
 
-    getCard() {
-        console.log(this.cards[0]);        
+    getCard() {    
         var drawnCard = this.cards[0];
         this.cards.splice(0, 1);
         return drawnCard;
