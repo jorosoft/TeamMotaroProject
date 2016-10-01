@@ -4,6 +4,7 @@ import "jquery";
 import "jqueryUI";
 import "bootstrap";
 import * as validate from "validator";
+import * as dataService from "users-authentication";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
 import * as roulette from "roulette";
@@ -31,12 +32,11 @@ export function showMenu() {
             .append("<link rel='stylesheet' href='style/menu.css'>");
     }
 
-    if (!validate.isUserLogged()) {
+    if (!dataService.isLoggedIn()) {
         showLoginForm();
     }
-
-    $("#menu")
-        .append(`<ul>
+    let p = $("#menu");
+        p.append(`<ul>
                     <li id="menu-item-one">
                         <a href="#"></a>
                         Blackjack
@@ -82,19 +82,44 @@ export function showMenu() {
 }
 
 function showLoginForm() {
-    $("#menu")
-        .append(`<form class="col-md-12">
+    $("#menu").append(`<form class="loginForm col-md-12">
                         <div class="form-group">
-                            <input type="text" class="form-control input-medium" placeholder="Email">
+                            <input type="text" class="form-control" placeholder="Username" id="tb-username">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control input-medium" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password" id="tb-password">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-warning btn-medium btn-block">Sign In</button>
-                            <span class="pull-right"><a href="#">New Registration</a></span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-warning btn-block" id="btn-signin">Sign In</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-warning btn-block" id="btn-register">Register</button>
+                                    <!--<span class="pull-right"><a href="#">New Registration</a></span>-->
+                                </div>
+                            </div>
                         </div>
                     </form>`);
+    $("#btn-login").on("click", (ev) => {
+        let user = {
+            username: $("#tb-username").val(),
+            passHash: $("#tb-password").val()
+        };
+        dataService.login(user)
+            .then($('#loginForm').hide());
+    });
+    $("#btn-register").on("click", (ev) => {
+        let user = {
+            username: $("#tb-username").val(),
+            passHash: $("#tb-password").val()
+        };
+        dataService.register(user)
+            .then(() => {
+                console.log($('#menu').find('.loginForm'));
+                $('#menu').find('.loginForm').remove();
+            })
+    });
 }
 
 function showErrorMessage(targetId, message) {

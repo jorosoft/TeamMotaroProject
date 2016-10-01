@@ -6,17 +6,8 @@ export function constants() {
     }
 }
 
-export function isUserLogged() {
-
-    // TODO: Implement check user login status 
-
-    return true;
-}
 
 export function isIncorrectString(value) {
-    if (!value || typeof value !== "string" || value.length === 0) {
-        return true;
-    }
+    return !!(!value || typeof value !== "string" || value.length === 0);
 
-    return false;
 }
