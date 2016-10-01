@@ -47,13 +47,13 @@ class Participant {
             if (this.score + 11 > 21) {
                 scoreToAdd = 1;
             } else {
-                scoreToAdd += 11;
+                scoreToAdd = 11;
                 this.aceCount++;
             }
         } else if (card.power === 'J' || card.power === 'Q' || card.power === 'K') {
-            scoreToAdd += 10;
+            scoreToAdd = 10;
         } else {
-            scoreToAdd += parseInt(card.power);
+            scoreToAdd = parseInt(card.power);
         }
 
         if (this.score + scoreToAdd > 21) {

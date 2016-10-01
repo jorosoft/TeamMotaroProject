@@ -3,24 +3,46 @@ import * as main from "main";
 import * as engine from "blackjackEngine";
 import * as models from "blackjackModels";
 
-const CARD_IMAGE_HEIGHT = 98;
+const CARD_IMAGE_HEIGHT = 100;
 const CARD_IMAGE_WIDTH = 75;
 const GAME_COST = 5;
-const DEALER_STAND = 17;
 const DELAY = 500;
 
 var imageSprite = '../img/cards-sprite.png',
     imageCardBack = '../img/cardBack.jpg',
-    cardCount = 1,
-    dealerCount = 1,
+    cardCount = 0,
+    cardTurned = false,
     cardNumber,
     coords,
+    card,
     money,
-    bet;
+    bet,
+    divId,
+    cssId,
+    participant;
 
 function cardCountReset() {
-    cardCount = 1;
-    dealerCount = 1;
+    cardCount = 0;
+}
+
+function showCard(card, participant) {
+    cardCount++;
+    divId = '#' + participant + 'Field';
+    cssId = 'drawn' + capitalizeFirstLetter(participant) + 'Card';
+    cardNumber = 'card' + cardCount;
+    $(divId).append("<div id='" + cardNumber + "' class =" + cssId + "><img /></div>");
+    $('#' + cardNumber).css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+    coords = models.getImageCoords(card);
+    $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
+    $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+    $('#' + cardNumber).css('display', 'none')
+        .show("slide", {
+            direction: "left"
+        });
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export function loadGame() {
@@ -35,78 +57,72 @@ export function loadGame() {
         .append("<button id='standBtn' class='btn btn-default btn-small btn-block' disabled>Stand</button>")
         .append("<div id='dealerField'></div>")
         .append("<div id='message'></div>")
-        .append("<div id='playerField'></div>");
-
+        .append("<div id='playerField'></div>")
+        .append("<div id='playerScore'></div>")
+        .append("<div id='dealerScore'></div>");
+        
+    $('#playerScore').html = "Score: " + engine.getPlayerScore();
+    $('#dealerScore').html = "Score: " + engine.getDealerScore();     
     $("#startGameBtn").on("click", startGame);
     $("#drawCardBtn").on("click", drawCard);
     $("#standBtn").on("click", stand);
     $("#backBtn").on("click", backToMenu);
-
-    $("#dealerField")
-        .append("<div id='dealerCardZero' class ='card'><img /></div>")
-        .append("<div id='dealerCardOne' class ='card'><img /></div>");
-    $("#playerField")
-        .append("<div id='playerCardZero' class ='card'><img /></div>")
-        .append("<div id='playerCardOne' class ='card'><img /></div>");
 }
 
 function stand() {
-    coords = models.getImageCoords(engine.getDealerCard(1));
-    $("#dealerCardOne img")
-        .attr("src", imageSprite)
-        .css('margin-top', (coords[0] * -1))
-        .css('margin-left', (coords[1] * -1))
-        .css('height', '')
-        .css('width', '');
-    //$("#dealerCardOne img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
     $('#standBtn').attr('disabled', 'disabled');
-    if (compareScore() < 0) {
-        $("#message").html('You lose!');
-        $("#message").css('color', 'LightCoral');
-        $('#drawCardBtn').attr('disabled', 'disabled');
-        $('#standBtn').attr('disabled', 'disabled');
-        $('#startGameBtn').attr('disabled', false);
-        return;
-    } else if (compareScore() === 0 && engine.getDealerScore() >= DEALER_STAND) {
-        $("#message").html('Draw!');
-        $("#message").css('color', 'LightGreen');
-        $('#drawCardBtn').attr('disabled', 'disabled');
-        $('#standBtn').attr('disabled', 'disabled');
-        $('#startGameBtn').attr('disabled', false);
-        money = main.getUserMoney() + bet;
-        main.setUserMoney(money);
-        bet = 0;
-        return;
-    } else if (compareScore() === 0 && engine.getDealerScore() < DEALER_STAND) {
-        dealerDraw();
-    } else if (compareScore() > 0 && engine.getDealerScore() < DEALER_STAND) {
-        dealerDraw();
-    } else {
-        $("#message").html('You win!');
-        $("#message").css('color', 'LightGreen');
-        $('#drawCardBtn').attr('disabled', 'disabled');
-        $('#standBtn').attr('disabled', 'disabled');
-        $('#startGameBtn').attr('disabled', false);
-        money = main.getUserMoney() + bet * 2;
-        main.setUserMoney(money);
-        bet = 0;
-        return;
+    $('#drawCardBtn').attr('disabled', 'disabled');    
+    if (cardTurned === false) {
+        coords = models.getImageCoords(engine.getDealerCard(1));
+        $("#card4 img")
+            .attr("src", imageSprite)
+            .css('margin-top', (coords[0] * -1))
+            .css('margin-left', (coords[1] * -1))
+            .css('height', '')
+            .css('width', '');
+        cardTurned = true;
     }
-
-    function dealerDraw() {
-        engine.dealerDraw();
-        dealerCount++;
-        cardNumber = 'dealerCard' + dealerCount;
-        $("#dealerField").append("<div id='" + cardNumber + "' class ='drawnDealerCard'><img /></div>");
-        $('#' + cardNumber).css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
-        coords = models.getImageCoords(engine.getDealerCard(dealerCount));
-        $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-top', (coords[0] * -1));
-        $('#' + cardNumber + " img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
-        $('#' + cardNumber).css('display', 'none')
-            .show("slide", {
-                direction: "left"
-            });
-        if (engine.getDealerScore() > 21) {
+    
+    if (engine.whatShouldDealerDo() === 'bust') {
+        window.setTimeout(function() {
+            $("#message").html('You win!');
+            $("#message").css('color', 'LightGreen');
+            $('#drawCardBtn').attr('disabled', 'disabled');
+            $('#standBtn').attr('disabled', 'disabled');
+            $('#startGameBtn').attr('disabled', false);
+            money = main.getUserMoney() + bet;
+            main.setUserMoney(money);
+            bet = 0;
+            return;
+        }, DELAY);        
+    } else if (engine.whatShouldDealerDo() === 'win') {
+        window.setTimeout( function() {
+            $("#message").html('You lose!');
+            $("#message").css('color', 'LightCoral');
+            $('#drawCardBtn').attr('disabled', 'disabled');
+            $('#standBtn').attr('disabled', 'disabled');
+            $('#startGameBtn').attr('disabled', false);
+        return;
+        }, DELAY);        
+    } else if (engine.whatShouldDealerDo() === 'draw') {
+        window.setTimeout(function() {
+            $("#message").html('Draw!');
+            $("#message").css('color', 'LightGreen');
+            $('#drawCardBtn').attr('disabled', 'disabled');
+            $('#standBtn').attr('disabled', 'disabled');
+            $('#startGameBtn').attr('disabled', false);
+            money = main.getUserMoney() + bet;
+            main.setUserMoney(money);
+            bet = 0;
+            return;
+        }, DELAY);        
+    } else if (engine.whatShouldDealerDo() === 'drawCard') {
+        window.setTimeout(function() {
+            showCard(engine.dealerDraw(), "dealer");
+            stand();
+        }, DELAY);
+    } else {
+        window.setTimeout(function() {
             $("#message").html('You win!');
             $("#message").css('color', 'LightGreen');
             $('#drawCardBtn').attr('disabled', 'disabled');
@@ -116,57 +132,32 @@ function stand() {
             main.setUserMoney(money);
             bet = 0;
             return;
-        } else if (engine.getDealerScore() === 21) {
-            $("#message").html('Blackjack!');
-            $("#message").css('color', 'LightCoral');
-            $('#drawCardBtn').attr('disabled', 'disabled');
-            window.setTimeout(stand, DELAY);
-        } else {
-            window.setTimeout(stand, DELAY);
-        }
-    }
-}
-
-function compareScore() {
-    if (engine.getPlayerScore() > engine.getDealerScore()) {
-        return 1;
-    } else if (engine.getPlayerScore() == engine.getDealerScore()) {
-        return 0;
-    } else {
-        return -1;
+        }, DELAY);
     }
 }
 
 function drawCard() {
-    engine.drawCard();
-    cardCount++;
-    cardNumber = 'card' + cardCount;
-    $("#playerField").append("<div id='" + cardNumber + "' class ='drawnCard'><img /></div>");
-    $('#' + cardNumber)
-        .css('width', CARD_IMAGE_WIDTH)
-        .css('height', CARD_IMAGE_HEIGHT)
-        .css('overflow', 'hidden');
-    coords = models.getImageCoords(engine.getPlayerCard(cardCount));
-    $('#' + cardNumber + " img")
-        .attr("src", imageSprite)
-        .css('margin-top', (coords[0] * -1))
-        .css('margin-left', (coords[1] * -1));
-    $('#' + cardNumber)
-        .css('display', 'none')
-        .show("slide", {
-            direction: "left"
-        });
-    //$('#' + cardNumber + " img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+    showCard(engine.playerDraw(), "player");
+    $('#drawCardBtn').attr('disabled', 'disabled');
     if (engine.getPlayerScore() > 21) {
-        $("#message").html('Bust!');
-        $("#message").css('color', 'LightCoral');
-        $('#drawCardBtn').attr('disabled', 'disabled');
-        $('#standBtn').attr('disabled', 'disabled');
-        $('#startGameBtn').attr('disabled', false);
+        window.setTimeout(function() {
+            $("#message").html('Bust!');
+            $("#message").css('color', 'LightCoral');
+            $('#standBtn').attr('disabled', 'disabled');
+            $('#startGameBtn').attr('disabled', false);
+        }, DELAY);        
     } else if (engine.getPlayerScore() === 21) {
-        $("#message").html('Blackjack!');
-        $("#message").css('color', 'LightGreen');
-        $('#drawCardBtn').attr('disabled', 'disabled');
+        window.setTimeout(function() {
+            $("#message").html('Blackjack!');
+            $("#message").css('color', 'LightGreen');
+            $('#drawCardBtn').attr('disabled', 'disabled');
+            $('#standBtn').attr('disabled', 'disabled');
+            stand();
+        }, DELAY);
+    } else {
+        window.setTimeout(function() {
+            $('#drawCardBtn').attr('disabled', false);
+        }, DELAY);
     }
 }
 
@@ -185,83 +176,51 @@ function startGame() {
     engine.startGame();
     $('#startGameBtn').attr('disabled', 'disabled');
     $("#dealerField").find('.drawnDealerCard').remove();
-    $("#playerField").find('.drawnCard').remove();
-    $("#playerCardZero img").removeAttr("src");
-    $("#playerCardOne img").removeAttr("src");
-    $("#dealerCardZero img").removeAttr("src");
-    $("#dealerCardOne img").removeAttr("src");
-    $('#dealerCardZero').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
-    $('#dealerCardOne').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
-    $('#playerCardZero').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
-    $('#playerCardOne').css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+    $("#playerField").find('.drawnPlayerCard').remove();
 
     window.setTimeout(drawFirstCard, DELAY);
 
     function drawFirstCard() {
-        coords = models.getImageCoords(engine.getPlayerCard(0));
-        $("#playerCardZero img")
-            .attr("src", imageSprite)
-            .css('margin-top', (coords[0] * -1))
-            .css('margin-left', (coords[1] * -1));
-        $("#playerCardZero")
-            .css('display', 'none')
-            .show("slide", {
-                direction: "left"
-            });
-        //$("#playerCardZero img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+        card = engine.getPlayerCard(0);
+        showCard(card, 'player');
         window.setTimeout(drawSecondCard, DELAY);
     }
 
     function drawSecondCard() {
-        coords = models.getImageCoords(engine.getDealerCard(0));
-        $("#dealerCardZero img")
-            .attr("src", imageSprite)
-            .css('margin-top', (coords[0] * -1))
-            .css('margin-left', (coords[1] * -1));
-        $("#dealerCardZero")
-            .css('display', 'none')
-            .show("slide", {
-                direction: "left"
-            });
-        //$("#dealerCardZero img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+        card = engine.getDealerCard(0);        
+        showCard(card, 'dealer');
         window.setTimeout(drawThirdCard, DELAY);
     }
 
     function drawThirdCard() {
-        coords = models.getImageCoords(engine.getPlayerCard(1));
-        $("#playerCardOne img")
-            .attr("src", imageSprite)
-            .css('margin-top', (coords[0] * -1))
-            .css('margin-left', (coords[1] * -1));
-        $("#playerCardOne")
-            .css('display', 'none')
-            .show("slide", {
-                direction: "left"
-            });
-        //$("#playerCardOne img").attr("src", imageSprite).css('margin-left', (coords[1] * -1));
+        card = engine.getPlayerCard(1);        
+        showCard(card, 'player');
         window.setTimeout(drawFourthCard, DELAY);
     }
 
     function drawFourthCard() {
-        coords = models.getImageCoords(engine.getDealerCard(1));
-        $("#dealerCardOne img")
-            .attr("src", imageCardBack)
-            .css('height', CARD_IMAGE_HEIGHT)
-            .css('width', CARD_IMAGE_WIDTH)
-            .css('margin-top', '')
-            .css('margin-left', '');
-        $("#dealerCardOne")
-            .css('display', 'none')
-            .show("slide", {
-                direction: "left"
-            });
+        cardCount++;
+        cardTurned = false;
+        divId = '#dealerField';
+        cssId = 'drawnDealerCard';
+        cardNumber = 'card' + cardCount;
+        $(divId).append("<div id='" + cardNumber + "' class =" + cssId + "><img /></div>");
+        $('#' + cardNumber).css('width', CARD_IMAGE_WIDTH).css('height', CARD_IMAGE_HEIGHT).css('overflow', 'hidden');
+        coords = models.getImageCoords(card);
+        $('#' + cardNumber + " img").attr("src", imageCardBack);
+        $('#' + cardNumber).css('display', 'none')
+        .show("slide", {
+            direction: "left"
+        });
         $('#drawCardBtn').attr('disabled', false);
         $('#standBtn').attr('disabled', false);
 
         if (engine.getPlayerScore() === 21) {
             $('#drawCardBtn').attr('disabled', 'disabled');
+            $('#standBtn').attr('disabled', 'disabled');            
             $("#message").html('Blackjack!');
             $("#message").css('color', 'LightGreen');
+            stand();
         }
     }
 }
