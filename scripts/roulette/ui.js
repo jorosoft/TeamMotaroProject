@@ -18,7 +18,7 @@ export function loadGame() {
     .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
     .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
     .append("<div id='bettingField'></div>")
-    .append("<canvas id='canvas' width='200' height='100'></canvas>")
+    .append("<canvas id='canvas' width='500' height='400'></canvas>")
     .append("<div id='message'></div>");
 
   $("#startBtn").on("click", startGame);

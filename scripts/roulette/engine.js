@@ -15,6 +15,8 @@ var colors = ['#c10000', "black",'#c10000', "black",'#c10000', "black",'#c10000'
   var spinTime = 0;
   var spinTimeTotal = 0;
   var ctx;
+  
+      var spinAngleStart;
 
     export function drawRoulette() {
     var canvas = document.getElementById("canvas");
