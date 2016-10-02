@@ -35,7 +35,7 @@ export function showMenu() {
 
         $("#menu")
             .append('<h1>Casino MOTARO</h1>' +
-                '<link rel="stylesheet" href="./style/menu.css">'+
+                '<link rel="stylesheet" href="./style/menu.css">' +
                 '<img id="logo" src="./img/motaro.png" />')
 
     }
@@ -60,7 +60,7 @@ export function showMenu() {
 `);
 
 
-    $("#menu-item-one").on("click", function () {
+    $("#menu-item-one").on("click", function() {
         if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
@@ -70,7 +70,7 @@ export function showMenu() {
 
     });
 
-    $("#menu-item-two").on("click", function () {
+    $("#menu-item-two").on("click", function() {
         if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
@@ -80,7 +80,7 @@ export function showMenu() {
 
     });
 
-    $("#menu-item-three").on("click", function () {
+    $("#menu-item-three").on("click", function() {
         if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
@@ -147,6 +147,7 @@ $("#btn-logout").on("click", (ev) => {
         });
 
 });
+
 function showErrorMessage(targetId, message) {
     $(targetId)
         .attr("data-toggle", "modal")
