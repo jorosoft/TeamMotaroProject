@@ -9,6 +9,7 @@ SystemJS.config({
         'jqueryUI': '../lib/jquery-ui.min.js',
         'main': '../scripts/common/main.js',
         'validator': '../scripts/common/validator.js',
+        'users-authentication': '../scripts/common/users-authentication.js',
         'models': '../scripts/common/models.js',
 
         'blackjack': '../scripts/blackjack/ui.js',

@@ -1,7 +1,14 @@
 // Game engine
 import * as models from 'blackjackModels';
 
+const DEALER_STAND = 17;
+const BLACKJACK = 21;
+const MIN_DECK = 30;
+
 export function startGame() {
+    if (deckOfCards.cards.length < MIN_DECK) {
+        deckOfCards = new models.Deck();
+    }
     player.drawCard(deckOfCards.getCard());
     dealer.drawCard(deckOfCards.getCard());
     player.drawCard(deckOfCards.getCard());
@@ -9,11 +16,18 @@ export function startGame() {
 }
 
 export function drawCard() {
-    player.drawCard(deckOfCards.getCard());    
+    return deckOfCards.getCard();
 }
 
+export function playerDraw() {
+    var card = deckOfCards.getCard();
+    player.drawCard(card);
+    return card;
+}
 export function dealerDraw() {
-    dealer.drawCard(deckOfCards.getCard());
+    var card = deckOfCards.getCard();
+    dealer.drawCard(card);
+    return card;
 }
 
 export function clear() {
@@ -40,6 +54,30 @@ export function getPlayerScore() {
 
 export function getDealerScore() {
     return dealer.score;
+}
+
+export function whatShouldDealerDo() {
+    if (getDealerScore() > BLACKJACK) {
+        return 'bust';
+    } else if (compareScore() < 0) {
+        return 'win';
+    } else if (compareScore() === 0 && getDealerScore() >= DEALER_STAND) {
+        return 'draw';        
+    } else if (compareScore() >= 0 && getDealerScore() < DEALER_STAND) {
+        return 'drawCard';
+    } else {
+        return 'lose';
+    }
+}
+
+function compareScore() {
+    if (getPlayerScore() > getDealerScore()) {
+        return 1;
+    } else if (getPlayerScore() == getDealerScore()) {
+        return 0;
+    } else {
+        return -1;
+    }
 }
 
 var player = new models.Player();

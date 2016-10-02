@@ -4,6 +4,7 @@ import "jquery";
 import "jqueryUI";
 import "bootstrap";
 import * as validate from "validator";
+import * as dataService from "users-authentication";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
 import * as roulette from "roulette";
@@ -22,21 +23,27 @@ export function setUserMoney(value) {
 
 export function showMenu() {
     if ($("#gameField").find("#menu").length === 0) {
-        $("#gameField")
-            .append("<div id='menu'></div>");
+        $("#gameField").append(`<div id='menu'></div>` +
+            `<div class="userLogout row">` +
+            `     <h3 id="player" >Player: ${localStorage.getItem('username')}</h3>` +
+            `     <button class="btn btn-warning" id="btn-logout">Logout</button>` +
+            `</div>`);
+
+        if (!localStorage.getItem('username')) {
+            $("#gameField").find('.userLogout').hide();
+        }
 
         $("#menu")
-            .append("<h1>Casino MOTARO</h1>")
-            .append("<img src='./img/motaro.png' />")
-            .append("<link rel='stylesheet' href='style/menu.css'>");
-    }
+            .append('<h1>Casino MOTARO</h1>' +
+                '<link rel="stylesheet" href="./style/menu.css">' +
+                '<img id="logo" src="./img/motaro.png" />')
 
-    if (!validate.isUserLogged()) {
+    }
+    if (!dataService.isLoggedIn()) {
         showLoginForm();
     }
-
-    $("#menu")
-        .append(`<ul>
+    let p = $("#menu");
+    p.append(`<ul>
                     <li id="menu-item-one">
                         <a href="#"></a>
                         Blackjack
@@ -49,10 +56,12 @@ export function showMenu() {
                         <a href="#"></a>
                         Slot Machine
                     </li>
-                </ul>`);
+                </ul>
+`);
+
 
     $("#menu-item-one").on("click", function() {
-        if (!validate.isUserLogged()) {
+        if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
@@ -62,17 +71,17 @@ export function showMenu() {
     });
 
     $("#menu-item-two").on("click", function() {
-        if (!validate.isUserLogged()) {
+        if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
-        }else{
+        } else {
             roulette.loadGame();
         }
 
     });
 
     $("#menu-item-three").on("click", function() {
-        if (!validate.isUserLogged()) {
+        if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
@@ -82,20 +91,62 @@ export function showMenu() {
 }
 
 function showLoginForm() {
-    $("#menu")
-        .append(`<form class="col-md-12">
+
+    $(`<form class="loginForm col-md-12">
                         <div class="form-group">
-                            <input type="text" class="form-control input-medium" placeholder="Email">
+                            <input type="text" class="form-control" placeholder="Username" id="tb-username">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control input-medium" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password" id="tb-password">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-warning btn-medium btn-block">Sign In</button>
-                            <span class="pull-right"><a href="#">New Registration</a></span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-warning btn-block" id="btn-signin">Sign In</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-warning btn-block" id="btn-register">Register</button>
+                                    <!--<span class="pull-right"><a href="#">New Registration</a></span>-->
+                                </div>
+                            </div>
                         </div>
-                    </form>`);
+                    </form>`).insertAfter($('#logo'));
+
 }
+
+$("#btn-login").on("click", (ev) => {
+    let user = {
+        username: $("#tb-username").val(),
+        passHash: $("#tb-password").val()
+    };
+    dataService.login(user)
+        .then($('.loginForm').remove());
+});
+$("#btn-register").on("click", (ev) => {
+    let user = {
+        username: $("#tb-username").val(),
+        passHash: $("#tb-password").val()
+    };
+    dataService.register(user)
+        .then(() => {
+            $('.loginForm').remove();
+        })
+        .then(() => {
+            $('.userLogout').show();
+        });
+
+});
+
+$("#btn-logout").on("click", (ev) => {
+    dataService.logout()
+        .then(() => {
+            $('.userLogout').hide();
+        })
+        .then(() => {
+            showLoginForm();
+        });
+
+});
 
 function showErrorMessage(targetId, message) {
     $(targetId)

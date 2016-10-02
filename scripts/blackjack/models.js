@@ -47,25 +47,22 @@ class Participant {
             if (this.score + 11 > 21) {
                 scoreToAdd = 1;
             } else {
-                scoreToAdd += 11;
+                scoreToAdd = 11;
                 this.aceCount++;
             }
         } else if (card.power === 'J' || card.power === 'Q' || card.power === 'K') {
-            scoreToAdd += 10;
+            scoreToAdd = 10;
         } else {
-            scoreToAdd += parseInt(card.power);
+            scoreToAdd = parseInt(card.power);
         }
 
         if (this.score + scoreToAdd > 21) {
             if (this.aceCount > 0) {
                 this.score -= 10;
                 this.aceCount--;
-            } else {
-                console.log('bust');
             }
         }
         this.score += scoreToAdd;
-        console.log(this.name + ' ' + this.score);
     }
 }
 
@@ -103,8 +100,7 @@ export class Deck {
         //console.log(this.cards);
     }
 
-    getCard() {
-        console.log(this.cards[0]);        
+    getCard() {    
         var drawnCard = this.cards[0];
         this.cards.splice(0, 1);
         return drawnCard;
