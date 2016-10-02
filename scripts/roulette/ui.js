@@ -42,7 +42,7 @@ function startGame() {
     money = main.getUserMoney() - BET_COST;
     bet = BET_COST;
     main.setUserMoney(money);
-
+    $("#spinBtn").remove();
     engine.drawRoulette();
     engine.spin();
 }
@@ -410,6 +410,8 @@ export function showResult(result) {
 // }
 
 function backToMenu() {
-    $("#roulette").remove();
-    main.showMenu();
+    if (!engine.isGameInProgress()) {
+        $("#roulette").remove();
+        main.showMenu();
+    }
 }

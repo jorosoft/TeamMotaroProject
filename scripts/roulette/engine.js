@@ -22,6 +22,7 @@ var spinTimeTotal = 0;
 var ctx;
 var text;
 var spinAngleStart;
+var gameInProgress = false;
 
 export function drawRoulette() {
     var canvas = document.getElementById("canvas");
@@ -82,6 +83,7 @@ export function drawRoulette() {
 
 //How fast and how long the roulette spins, should have some randomness
 export function spin() {
+    gameInProgress = true;
     spinAngleStart = Math.random() * 10 + 10;
     spinTime = 0;
     spinTimeTotal = Math.random() * 10 + 10000;
@@ -116,6 +118,7 @@ export function stopRotateWheel() {
     } else {
         ui.showResult("You lose!");
     }
+    gameInProgress = false;
 }
 
 //The spinning roulette wheel should stop gradually and not suddenly
@@ -188,4 +191,8 @@ function isGameWon(bet) {
     }
 
     return false;
+}
+
+export function isGameInProgress() {
+    return gameInProgress;
 }
