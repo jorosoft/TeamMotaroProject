@@ -2,13 +2,14 @@
 
 const HTTP_HEADER_KEY = "x-auth-key",
     KEY_STORAGE_USERNAME = "username",
-    KEY_STORAGE_AUTH_KEY = "authKey";
+    PASSWORD_AUTH_KEY = "passHashKey";
 
 export function login(respUser) {
     /*return requester.putJSON("/api/auth", user)
      .then(respUser => {*/
     localStorage.setItem(KEY_STORAGE_USERNAME, respUser.username);
-    localStorage.setItem(KEY_STORAGE_AUTH_KEY, respUser.passHash);
+    localStorage.setItem(HTTP_HEADER_KEY, respUser.authKey);
+    localStorage.setItem(PASSWORD_AUTH_KEY, respUser.passHash);
     resolve();
     /* });*/
 }
@@ -18,7 +19,8 @@ export function register(respUser) {
     return new Promise((resolve, reject) => {
         console.log(respUser);
         localStorage.setItem(KEY_STORAGE_USERNAME, respUser.username);
-        localStorage.setItem(KEY_STORAGE_AUTH_KEY, respUser.passHash);
+        localStorage.setItem(HTTP_HEADER_KEY, respUser.authKey);
+        localStorage.setItem(PASSWORD_AUTH_KEY, respUser.passHash);
         resolve();
     });
 }

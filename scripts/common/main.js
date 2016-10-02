@@ -5,6 +5,7 @@ import "jqueryUI";
 import "bootstrap";
 import * as validate from "validator";
 import * as dataService from "users-authentication";
+import * as userController from "user-controller";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
 import * as roulette from "roulette";
@@ -125,6 +126,7 @@ $("#btn-login").on("click", (ev) => {
 $("#btn-register").on("click", (ev) => {
     let user = {
         username: $("#tb-username").val(),
+        authKey: userController.authKeyGenerator(),
         passHash: $("#tb-password").val()
     };
     dataService.register(user)
