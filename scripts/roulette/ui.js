@@ -127,7 +127,7 @@ export function getBet() {
     return $("#selectedBet span").html();
 }
 
-
+//Needed some fixes
 // function smallWin() {
 //     $("#message").html('You won!');
 //     money = main.getUserMoney() + BET_COST;
