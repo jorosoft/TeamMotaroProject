@@ -3,8 +3,12 @@ import * as models from 'blackjackModels';
 
 const DEALER_STAND = 17;
 const BLACKJACK = 21;
+const MIN_DECK = 30;
 
 export function startGame() {
+    if (deckOfCards.cards.length < MIN_DECK) {
+        deckOfCards = new models.Deck();
+    }
     player.drawCard(deckOfCards.getCard());
     dealer.drawCard(deckOfCards.getCard());
     player.drawCard(deckOfCards.getCard());
@@ -12,7 +16,7 @@ export function startGame() {
 }
 
 export function drawCard() {
-    return deckOfCards.getCard();    
+    return deckOfCards.getCard();
 }
 
 export function playerDraw() {
@@ -75,7 +79,6 @@ function compareScore() {
         return -1;
     }
 }
-
 
 var player = new models.Player();
 var dealer = new models.Dealer();
