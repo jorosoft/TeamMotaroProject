@@ -1,4 +1,5 @@
 import * as models from "rouletteModels";
+import * as ui from "roulette";
 
 var colors = ['#c10000', "black", '#c10000', "black", '#c10000', "black", '#c10000', "black",
     '#c10000', "black", '#c10000', "black", '#c10000', "black", '#c10000', "black", '#c10000',
@@ -19,7 +20,7 @@ var spinArcStart = 10;
 var spinTime = 0;
 var spinTimeTotal = 0;
 var ctx;
-
+var text;
 var spinAngleStart;
 
 export function drawRoulette() {
@@ -108,8 +109,13 @@ export function stopRotateWheel() {
     var index = Math.floor((360 - degrees % 360) / arcd);
     ctx.save();
     ctx.font = 'bold 30px sans-serif';
-    var text = numbers[index]
+    text = numbers[index]
     ctx.fillText(text, 185 - ctx.measureText(text).width / 2, 185 + 10);
+    if (isGameWon(ui.getBet())) {
+        console.log("You win!");
+    } else {
+        console.log("You lose!");
+    }
 }
 
 //The spinning roulette wheel should stop gradually and not suddenly
@@ -117,4 +123,72 @@ export function easeOut(t, b, c, d) {
     var ts = (t /= d) * t;
     var tc = ts * t;
     return b + c * (tc + -3 * ts + 3 * t);
+}
+
+function isGameWon(bet) {
+    let resultIndex;
+    switch (bet) {
+        case "1st 12":
+            if (+text >= 1 && +text <= 12) {
+                return true;
+            }
+            break;
+        case "2nd 12":
+            if (+text >= 13 && +text <= 24) {
+                return true;
+            }
+            break;
+        case "3rd 12":
+            if (+text >= 25 && +text <= 36) {
+                return true;
+            }
+            break;
+        case "1-18":
+            if (+text >= 1 && +text <= 18) {
+                return true;
+            }
+            break;
+        case "19-36":
+            if (+text >= 19 && +text <= 36) {
+                return true;
+            }
+            break;
+        case "Even":
+            if (+text % 2 === 0) {
+                return true;
+            }
+            break;
+        case "Odd":
+            if (+text % 2 !== 0) {
+                return true;
+            }
+            break;
+        case "Red":
+            resultIndex = numbers.indexOf(text);
+            if (colors[resultIndex] === "#c10000") {
+                return true;
+            }
+            break;
+        case "Black":
+            resultIndex = numbers.indexOf(text);
+            if (colors[resultIndex] === "black") {
+                return true;
+            }
+            break;
+        case "2-1":
+            // I don't understand this case :-)
+            break;
+        case "00":
+            if (text === bet) {
+                return true;
+            }
+            break;
+        default:
+            if (+text === +bet) {
+                return true;
+            }
+            break;
+    }
+
+    return false;
 }

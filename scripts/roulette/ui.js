@@ -133,6 +133,10 @@ function selectBet(selected) {
     $("#selectedBet span").html(selected.html());
 }
 
+export function getBet() {
+    return $("#selectedBet span").html();
+}
+
 function bettingResult() {
 
 }

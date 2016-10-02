@@ -125,13 +125,16 @@ $("#btn-login").on("click", (ev) => {
 });
 
 $("#btn-register").on("click", (ev) => {
+    console.log(CryptoJS.SHA1($("#tb-password").val()))
     let id = userController.generateGUID(),
+        pass = CryptoJS.SHA1($("#tb-password").val()),
         user = {
         username: $("#tb-username").val(),
         id: id,
         authKey: userController.generateAuthKey(id),
-        passHash: $("#tb-password").val()
+        passHash: pass
     };
+
     dataService.register(user)
         .then(() => {
             $('.loginForm').remove();
