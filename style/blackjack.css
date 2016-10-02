@@ -127,3 +127,7 @@
     display: inline-block;
     position: relative;
 }
+
+.row {
+    margin-top: -6%;
+}
