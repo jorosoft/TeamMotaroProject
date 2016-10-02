@@ -1,5 +1,5 @@
 #roulette {
-    width: 400px;
+    width: 500px;
     height: 400px;
     float: right;
     margin-top: 4%;
@@ -17,7 +17,7 @@
     width: 120px;
     position: relative;
     top: 100px;
-    left: 20%;
+    left: 2%;
 }
 
 #roulette #spinBtn {
@@ -53,6 +53,19 @@
     font-size: 16px;
     font-weight: bold;
     border: 2px solid white;
+}
+
+#selectedBet {
+    font-family: "arial";
+    font-size: 26px;
+    position: relative;
+    top: 50px;
+    left: 2%;
+}
+
+#selectedBet span {
+    color: darkgray;
+    font-weight: bold;
 }
 
 .no-border {

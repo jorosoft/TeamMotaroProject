@@ -12,26 +12,33 @@ export function loadGame() {
     $("#menu").find("ul").remove();
     $("#menu").append("<div id='roulette'></div>");
 
+    showRouletteTable();
 
     $("#roulette")
-        .append("<link rel='stylesheet' href='style/roulette.css'>")
-        .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
         .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
         .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
-        .append("<div id='bettingField'><table id='table'><tr><td>Red</td><td>Black</td></tr><tr><td>Odd</td><td>Even</td></tr></table></div>")
-        .append("<canvas id='canvas' width='500' height='400'></canvas>")
-        .append("<div id='message'></div>");
+        .append("<link rel='stylesheet' href='style/roulette.css'>");
+    //     .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
+    //     .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
+    //     .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
+    //     .append("<div id='bettingField'><table id='table'><tr><td>Red</td><td>Black</td></tr><tr><td>Odd</td><td>Even</td></tr></table></div>")
+    //     .append("<canvas id='canvas' width='500' height='400'></canvas>")
+    //     .append("<div id='message'></div>");
 
-    $("#startBtn").on("click", startGame);
+    // $("#startBtn").on("click", startGame);
     $("#backBtn").on("click", backToMenu);
-    $("#spinBtn").on("click", spin);
-    $("#table").on('click', 'td', function() {
-        alert($(this).text());
-        selection = $(this).text();
-    });
+    $("#spinBtn").on("click", startGame);
+    // $("#table").on('click', 'td', function() {
+    //     alert($(this).text());
+    //     selection = $(this).text();
+    // });
 }
 
 function startGame() {
+    $("#rouletteTable").remove();
+    $("#roulette")
+        .append("<canvas id='canvas' width='500' height='400'></canvas>")
+        .append("<div id='message'></div>");
     $("#message").html('');
     if (main.getUserMoney() < BET_COST) {
         $("#message").html('Insufficent funds!');
@@ -43,10 +50,11 @@ function startGame() {
     main.setUserMoney(money);
 
     engine.drawRoulette();
+    engine.spin();
 }
 
 function showRouletteTable() {
-    $("#menu").append("<div id='rouletteTable'></div>");
+    $("#roulette").append("<div id='rouletteTable'></div>");
     $("#rouletteTable").html(`
         <table>
             <tr>
@@ -115,7 +123,7 @@ function showRouletteTable() {
             </tr>
         </table>`);
 
-    $("#rouletteTable").append("<div id='selectedBet'>Your bet is on: <span></span></div>");
+    $("#roulette").append("<div id='selectedBet'>Your bet is on: <span></span></div>");
 
     $("#rouletteTable td:not(.no-border)").on("click", (ev) => selectBet($(ev.target)));
 }
