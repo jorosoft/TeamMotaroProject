@@ -118,3 +118,55 @@ export function easeOut(t, b, c, d) {
     var tc = ts * t;
     return b + c * (tc + -3 * ts + 3 * t);
 }
+
+export function isGameWon(bet, result) {
+    switch (bet) {
+        case "1st 12":
+            if (1 >= +result <= 12) {
+                return true;
+            }
+        case "2nd 12":
+            if (13 >= +result <= 24) {
+                return true;
+            }
+        case "3rd 12":
+            if (25 >= +result <= 36) {
+                return true;
+            }
+        case "1-18":
+            if (1 >= +result <= 18) {
+                return true;
+            }
+        case "19-36":
+            if (19 >= +result <= 36) {
+                return true;
+            }
+        case "Even":
+            if (+result % 2 === 0) {
+                return true;
+            }
+        case "Odd":
+            if (+result % 2 !== 0) {
+                return true;
+            }
+        case "Red":
+
+            break;
+        case "Black":
+
+            break;
+        case "2-1":
+
+            break;
+        case "00":
+            if (result === bet) {
+                return true;
+            }
+        default:
+            if (+result === +bet) {
+                return true;
+            }
+    }
+
+    return false;
+}
