@@ -175,9 +175,6 @@ function isGameWon(bet) {
                 return true;
             }
             break;
-        case "2-1":
-            // I don't understand this case :-)
-            break;
         case "00":
             if (text === bet) {
                 return true;
