@@ -120,6 +120,7 @@ export function easeOut(t, b, c, d) {
 }
 
 export function isGameWon(bet, result) {
+    let resultIndex;
     switch (bet) {
         case "1st 12":
             if (+result >= 1 && +result <= 12) {
@@ -150,13 +151,18 @@ export function isGameWon(bet, result) {
                 return true;
             }
         case "Red":
-
+            resultIndex = numbers.indexOf(+result);
+            if (colors[resultIndex] === "#c10000") {
+                return true;
+            }
             break;
         case "Black":
-
-            break;
+            resultIndex = numbers.indexOf(+result);
+            if (colors[resultIndex] === "black") {
+                return true;
+            }
         case "2-1":
-
+            // I don't understand this case :-)
             break;
         case "00":
             if (result === bet) {
