@@ -36,6 +36,9 @@ export function loadGame() {
 
 function startGame() {
     $("#rouletteTable").remove();
+    $("#roulette")
+        .append("<canvas id='canvas' width='500' height='400'></canvas>")
+        .append("<div id='message'></div>");
     $("#message").html('');
     if (main.getUserMoney() < BET_COST) {
         $("#message").html('Insufficent funds!');
