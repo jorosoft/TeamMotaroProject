@@ -19,19 +19,12 @@ export function loadGame() {
         .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
         .append("<link rel='stylesheet' href='style/roulette.css'>");
     //     .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
-    //     .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
-    //     .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
-    //     .append("<div id='bettingField'><table id='table'><tr><td>Red</td><td>Black</td></tr><tr><td>Odd</td><td>Even</td></tr></table></div>")
     //     .append("<canvas id='canvas' width='500' height='400'></canvas>")
     //     .append("<div id='message'></div>");
 
     // $("#startBtn").on("click", startGame);
     $("#backBtn").on("click", backToMenu);
     $("#spinBtn").on("click", startGame);
-    // $("#table").on('click', 'td', function() {
-    //     alert($(this).text());
-    //     selection = $(this).text();
-    // });
 }
 
 function startGame() {
@@ -138,10 +131,6 @@ function selectBet(selected) {
 
     selected.css("color", selectedColor);
     $("#selectedBet span").html(selected.html());
-}
-
-function spin() {
-    engine.spin();
 }
 
 function bettingResult() {
