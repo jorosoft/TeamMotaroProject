@@ -97,7 +97,7 @@ export function rotateWheel() {
     var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
     startAngle += (spinAngle * Math.PI / 180);
     drawRoulette();
-    spinTimeout = setTimeout('rotateWheel()', 30);
+    spinTimeout = setTimeout(rotateWheel, 30);
     //var answer = document.getElementById('answer');
     //answer.innerHTML = '';
 }

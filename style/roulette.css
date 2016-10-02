@@ -17,19 +17,15 @@
     width: 120px;
     position: relative;
     top: 100px;
-    left: 2%;
-}
-
-#roulette #spinBtn {
-    width: 120px;
-    position: relative;
-    top: 200px;
     left: 20%;
 }
 
-#bettingField {
-    width: 300px;
-    height: 300px;
+#roulette #spinBtn {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    top: 180px;
+    left: 30%;
 }
 
 #table {
