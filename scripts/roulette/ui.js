@@ -27,7 +27,7 @@ export function loadGame() {
 
     // $("#startBtn").on("click", startGame);
     $("#backBtn").on("click", backToMenu);
-    $("#spinBtn").on("click", spin);
+    $("#spinBtn").on("click", startGame);
     // $("#table").on('click', 'td', function() {
     //     alert($(this).text());
     //     selection = $(this).text();
@@ -35,6 +35,7 @@ export function loadGame() {
 }
 
 function startGame() {
+    $("#rouletteTable").remove();
     $("#message").html('');
     if (main.getUserMoney() < BET_COST) {
         $("#message").html('Insufficent funds!');
@@ -46,6 +47,7 @@ function startGame() {
     main.setUserMoney(money);
 
     engine.drawRoulette();
+    engine.spin();
 }
 
 function showRouletteTable() {
@@ -118,7 +120,7 @@ function showRouletteTable() {
             </tr>
         </table>`);
 
-    $("#rouletteTable").append("<div id='selectedBet'>Your bet is on: <span></span></div>");
+    $("#roulette").append("<div id='selectedBet'>Your bet is on: <span></span></div>");
 
     $("#rouletteTable td:not(.no-border)").on("click", (ev) => selectBet($(ev.target)));
 }
