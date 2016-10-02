@@ -64,7 +64,6 @@ function showRouletteTable() {
                 <td class='red'>30</td>
                 <td class='black'>33</td>
                 <td class='red'>36</td>
-                <td class='green'>2-1</td>
             </tr>
             <tr>
                 <td class='black'>2</td>
@@ -79,7 +78,6 @@ function showRouletteTable() {
                 <td class='black'>29</td>
                 <td class='red'>32</td>
                 <td class='black'>35</td>
-                <td class='green'>2-1</td>
             </tr>
             <tr>
                 <td class='green'>0</td>
@@ -95,7 +93,6 @@ function showRouletteTable() {
                 <td class='red'>28</td>
                 <td class='black'>31</td>
                 <td class='red'>34</td>
-                <td class='green'>2-1</td>
             </tr>
             <tr>
                 <td class='no-border'></td>
