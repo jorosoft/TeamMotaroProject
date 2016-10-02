@@ -27,7 +27,7 @@ export function loadGame() {
   $("#spinBtn").on("click", spin);
   $("#table").on('click', 'td', function() { 
      alert($(this).text());
-     selection = $(this).text()
+     selection = $(this).text();
 });
 }
 
