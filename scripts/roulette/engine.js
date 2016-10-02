@@ -118,3 +118,61 @@ export function easeOut(t, b, c, d) {
     var tc = ts * t;
     return b + c * (tc + -3 * ts + 3 * t);
 }
+
+export function isGameWon(bet, result) {
+    let resultIndex;
+    switch (bet) {
+        case "1st 12":
+            if (+result >= 1 && +result <= 12) {
+                return true;
+            }
+        case "2nd 12":
+            if (+result >= 13 && +result <= 24) {
+                return true;
+            }
+        case "3rd 12":
+            if (+result >= 25 && +result <= 36) {
+                return true;
+            }
+        case "1-18":
+            if (+result >= 1 && +result <= 18) {
+                return true;
+            }
+        case "19-36":
+            if (+result >= 19 && +result <= 36) {
+                return true;
+            }
+        case "Even":
+            if (+result % 2 === 0) {
+                return true;
+            }
+        case "Odd":
+            if (+result % 2 !== 0) {
+                return true;
+            }
+        case "Red":
+            resultIndex = numbers.indexOf(+result);
+            if (colors[resultIndex] === "#c10000") {
+                return true;
+            }
+            break;
+        case "Black":
+            resultIndex = numbers.indexOf(+result);
+            if (colors[resultIndex] === "black") {
+                return true;
+            }
+        case "2-1":
+            // I don't understand this case :-)
+            break;
+        case "00":
+            if (result === bet) {
+                return true;
+            }
+        default:
+            if (+result === +bet) {
+                return true;
+            }
+    }
+
+    return false;
+}
