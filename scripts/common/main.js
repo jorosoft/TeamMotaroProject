@@ -23,20 +23,27 @@ export function setUserMoney(value) {
 
 export function showMenu() {
     if ($("#gameField").find("#menu").length === 0) {
-        $("#gameField")
-            .append("<div id='menu'></div>");
+        $("#gameField").append(`<div id='menu'></div>` +
+            `<div class="userLogout row">` +
+            `     <h3 id="player" >Player: ${localStorage.getItem('username')}</h3>` +
+            `     <button class="btn btn-warning" id="btn-logout">Logout</button>` +
+            `</div>`);
+
+        if (!localStorage.getItem('username')) {
+            $("#gameField").find('.userLogout').hide();
+        }
 
         $("#menu")
-            .append("<h1>Casino MOTARO</h1>")
-            .append("<img src='./img/motaro.png' />")
-            .append("<link rel='stylesheet' href='style/menu.css'>");
-    }
+            .append('<h1>Casino MOTARO</h1>' +
+                '<link rel="stylesheet" href="./style/menu.css">'+
+                '<img id="logo" src="./img/motaro.png" />')
 
+    }
     if (!dataService.isLoggedIn()) {
         showLoginForm();
     }
     let p = $("#menu");
-        p.append(`<ul>
+    p.append(`<ul>
                     <li id="menu-item-one">
                         <a href="#"></a>
                         Blackjack
@@ -49,10 +56,12 @@ export function showMenu() {
                         <a href="#"></a>
                         Slot Machine
                     </li>
-                </ul>`);
+                </ul>
+`);
 
-    $("#menu-item-one").on("click", function() {
-        if (!validate.isUserLogged()) {
+
+    $("#menu-item-one").on("click", function () {
+        if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
@@ -61,18 +70,18 @@ export function showMenu() {
 
     });
 
-    $("#menu-item-two").on("click", function() {
-        if (!validate.isUserLogged()) {
+    $("#menu-item-two").on("click", function () {
+        if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
-        }else{
+        } else {
             roulette.loadGame();
         }
 
     });
 
-    $("#menu-item-three").on("click", function() {
-        if (!validate.isUserLogged()) {
+    $("#menu-item-three").on("click", function () {
+        if (!dataService.isLoggedIn()) {
             let targetId = "#" + $(this).attr("id");
             showErrorMessage(targetId, validate.constants().USER_NOT_LOGGED_MESSAGE);
         } else {
@@ -82,7 +91,8 @@ export function showMenu() {
 }
 
 function showLoginForm() {
-    $("#menu").append(`<form class="loginForm col-md-12">
+
+    $(`<form class="loginForm col-md-12">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Username" id="tb-username">
                         </div>
@@ -100,28 +110,43 @@ function showLoginForm() {
                                 </div>
                             </div>
                         </div>
-                    </form>`);
-    $("#btn-login").on("click", (ev) => {
-        let user = {
-            username: $("#tb-username").val(),
-            passHash: $("#tb-password").val()
-        };
-        dataService.login(user)
-            .then($('#loginForm').hide());
-    });
-    $("#btn-register").on("click", (ev) => {
-        let user = {
-            username: $("#tb-username").val(),
-            passHash: $("#tb-password").val()
-        };
-        dataService.register(user)
-            .then(() => {
-                console.log($('#menu').find('.loginForm'));
-                $('#menu').find('.loginForm').remove();
-            })
-    });
+                    </form>`).insertAfter($('#logo'));
+
 }
 
+$("#btn-login").on("click", (ev) => {
+    let user = {
+        username: $("#tb-username").val(),
+        passHash: $("#tb-password").val()
+    };
+    dataService.login(user)
+        .then($('.loginForm').remove());
+});
+$("#btn-register").on("click", (ev) => {
+    let user = {
+        username: $("#tb-username").val(),
+        passHash: $("#tb-password").val()
+    };
+    dataService.register(user)
+        .then(() => {
+            $('.loginForm').remove();
+        })
+        .then(() => {
+            $('.userLogout').show();
+        });
+
+});
+
+$("#btn-logout").on("click", (ev) => {
+    dataService.logout()
+        .then(() => {
+            $('.userLogout').hide();
+        })
+        .then(() => {
+            showLoginForm();
+        });
+
+});
 function showErrorMessage(targetId, message) {
     $(targetId)
         .attr("data-toggle", "modal")
