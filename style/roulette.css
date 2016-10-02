@@ -1,36 +1,46 @@
 #roulette {
-    width: 500px;
-    height: 400px;
+    width: 550px;
+    height: 300px;
     float: right;
     margin-top: 4%;
     margin-right: 5%;
-    /*background: */
+}
+
+#canvas {
+    display: inline-block;
 }
 
 #roulette button {
-    width: 120px;
-    height: 50px;
-    float: right;
+    position: relative;
+    top: 10px;
+    left: 10%;
 }
 
 #roulette #backBtn {
     width: 120px;
-    position: relative;
-    top: 100px;
-    left: 20%;
+    height: 40px;
+    float: right;
+    margin-right: 5%;
 }
 
 #roulette #spinBtn {
-    width: 60px;
-    height: 30px;
+    width: 70px;
+    height: 50px;
+    float: right;
+    margin-right: 5%;
     position: relative;
-    top: 180px;
-    left: 30%;
+    top: -70%;
 }
 
 #table {
     width: 200px;
     height: 200px;
+}
+
+#rouletteTable {
+    width: 400px;
+    height: 300px;
+    display: inline-block;
 }
 
 #rouletteTable table {
@@ -52,16 +62,28 @@
 }
 
 #selectedBet {
+    width: 180px;
+    height: 80px;
     font-family: "arial";
     font-size: 26px;
+    float: right;
     position: relative;
-    top: 50px;
-    left: 2%;
+    top: -46%;
+    left: 26%;
 }
 
 #selectedBet span {
     color: darkgray;
     font-weight: bold;
+    position: relative;
+    left: 30%;
+}
+
+#message {
+    font-family: "arial";
+    font-weight: bold;
+    color: brown;
+    font-size: 42px;
 }
 
 .no-border {

@@ -26,14 +26,14 @@ var spinAngleStart;
 export function drawRoulette() {
     var canvas = document.getElementById("canvas");
     if (canvas.getContext) {
-        var outsideRadius = 180;
-        var textRadius = 155;
-        var insideRadius = 105;
-        var middleRadius = 125;
-        var canvasWidth = 200;
-        var canvasHeight = 200;
-        var xCoord = 185;
-        var yCoord = 185;
+        var outsideRadius = 140;
+        var textRadius = 115;
+        var insideRadius = 95;
+        var middleRadius = 105;
+        var canvasWidth = 180;
+        var canvasHeight = 180;
+        var xCoord = 145;
+        var yCoord = 145;
         var amountOfNumbers = 38;
         var pause = false;
         ctx = canvas.getContext("2d");
@@ -61,7 +61,7 @@ export function drawRoulette() {
             ctx.fillStyle = "white";
             ctx.translate(xCoord + Math.cos(angle + arc / 2) * textRadius, yCoord + Math.sin(angle + arc / 2) * textRadius);
             ctx.rotate(angle + arc / 2 + Math.PI / 2);
-            var text = numbers[i];
+            text = numbers[i];
             ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
             ctx.restore();
         }
@@ -110,11 +110,11 @@ export function stopRotateWheel() {
     ctx.save();
     ctx.font = 'bold 30px sans-serif';
     text = numbers[index]
-    ctx.fillText(text, 185 - ctx.measureText(text).width / 2, 185 + 10);
+    ctx.fillText(text, 145 - ctx.measureText(text).width / 2, 145 + 10);
     if (isGameWon(ui.getBet())) {
-        console.log("You win!");
+        ui.showResult("You win!");
     } else {
-        console.log("You lose!");
+        ui.showResult("You lose!");
     }
 }
 

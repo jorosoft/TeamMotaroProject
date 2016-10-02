@@ -17,6 +17,7 @@ export function loadGame() {
     $("#roulette")
         .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
         .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
+        .append("<div id='selectedBet'>Your bet is on: <span></span></div>")
         .append("<link rel='stylesheet' href='style/roulette.css'>");
     //     .append("<button id='startBtn' class='btn btn-success btn-block'>Start</button>")
     //     .append("<canvas id='canvas' width='500' height='400'></canvas>")
@@ -30,7 +31,7 @@ export function loadGame() {
 function startGame() {
     $("#rouletteTable").remove();
     $("#roulette")
-        .append("<canvas id='canvas' width='500' height='400'></canvas>")
+        .prepend("<canvas id='canvas' width='400' height='300'></canvas>")
         .append("<div id='message'></div>");
     $("#message").html('');
     if (main.getUserMoney() < BET_COST) {
@@ -99,7 +100,6 @@ function showRouletteTable() {
                 <td class='green'colspan='4'>1st 12</td>
                 <td class='green' colspan='4'>2nd 12</td>
                 <td class='green' colspan='4'>3rd 12</td>
-                <td class='no-border'></td>
             </tr>
             <tr>
                 <td class='no-border'></td>
@@ -109,11 +109,8 @@ function showRouletteTable() {
                 <td class='black' colspan='2'>Black</td>
                 <td class='green' colspan='2'>Odd</td>
                 <td class='green' colspan='2'>19-36</td>
-                <td class='no-border'></td>
             </tr>
         </table>`);
-
-    $("#roulette").append("<div id='selectedBet'>Your bet is on: <span></span></div>");
 
     $("#rouletteTable td:not(.no-border)").on("click", (ev) => selectBet($(ev.target)));
 }
@@ -151,6 +148,10 @@ function midWin() {
 function loser() {
     $("#message").html('You lost!');
     money = main.getUserMoney() - BET_COST;
+}
+
+export function showResult(result) {
+    $("#message").html(result);
 }
 
 //Showing the result of the bet
