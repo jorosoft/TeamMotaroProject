@@ -1,13 +1,15 @@
 // Casino users authentication
 
 const HTTP_HEADER_KEY = "x-auth-key",
-    KEY_STORAGE_USERNAME = "username",
+    GENERATED_ID_KEY = 'id',
+    STORAGE_USERNAME_KEY = "username",
     PASSWORD_AUTH_KEY = "passHashKey";
 
 export function login(respUser) {
     /*return requester.putJSON("/api/auth", user)
      .then(respUser => {*/
-    localStorage.setItem(KEY_STORAGE_USERNAME, respUser.username);
+    localStorage.setItem(STORAGE_USERNAME_KEY, respUser.username);
+    localStorage.setItem(GENERATED_ID_KEY, respUser.id);
     localStorage.setItem(HTTP_HEADER_KEY, respUser.authKey);
     localStorage.setItem(PASSWORD_AUTH_KEY, respUser.passHash);
     resolve();
@@ -18,7 +20,8 @@ export function register(respUser) {
     //return requester.postJSON("/api/users", user);
     return new Promise((resolve, reject) => {
         console.log(respUser);
-        localStorage.setItem(KEY_STORAGE_USERNAME, respUser.username);
+        localStorage.setItem(STORAGE_USERNAME_KEY, respUser.username);
+        localStorage.setItem(GENERATED_ID_KEY, respUser.id);
         localStorage.setItem(HTTP_HEADER_KEY, respUser.authKey);
         localStorage.setItem(PASSWORD_AUTH_KEY, respUser.passHash);
         resolve();
@@ -28,10 +31,12 @@ export function register(respUser) {
 export function logout() {
     return Promise.resolve()
         .then(() => {
-            localStorage.removeItem(KEY_STORAGE_USERNAME);
-            localStorage.removeItem(KEY_STORAGE_AUTH_KEY);
+            localStorage.removeItem(STORAGE_USERNAME_KEY);
+            localStorage.removeItem(GENERATED_ID_KEY);
+            localStorage.removeItem(HTTP_HEADER_KEY);
+            localStorage.removeItem(PASSWORD_AUTH_KEY);
         });
 }
 export function isLoggedIn() {
-    return !!localStorage.getItem(KEY_STORAGE_USERNAME);
+    return !!localStorage.getItem(STORAGE_USERNAME_KEY);
 }

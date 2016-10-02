@@ -123,10 +123,13 @@ $("#btn-login").on("click", (ev) => {
     dataService.login(user)
         .then($('.loginForm').remove());
 });
+
 $("#btn-register").on("click", (ev) => {
-    let user = {
+    let id = userController.generateGUID(),
+        user = {
         username: $("#tb-username").val(),
-        authKey: userController.authKeyGenerator(),
+        id: id,
+        authKey: userController.generateAuthKey(id),
         passHash: $("#tb-password").val()
     };
     dataService.register(user)
