@@ -140,10 +140,6 @@ function selectBet(selected) {
     $("#selectedBet span").html(selected.html());
 }
 
-function spin() {
-    engine.spin();
-}
-
 function bettingResult() {
 
 }
