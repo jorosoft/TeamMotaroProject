@@ -1,5 +1,6 @@
 // Casino users authentication
 
+
 const HTTP_HEADER_KEY = "x-auth-key",
     GENERATED_ID_KEY = 'id',
     STORAGE_USERNAME_KEY = "username",
