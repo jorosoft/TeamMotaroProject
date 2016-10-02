@@ -16,6 +16,7 @@ export function loadGame() {
     $("#roulette")
         .append("<button id='backBtn' class='btn btn-default btn-small btn-block'>Back to menu</button>")
         .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
+        .append("<div id='selectedBet'>Your bet is on: <span></span></div>")
         .append("<link rel='stylesheet' href='style/roulette.css'>");
     //     .append("<div id='message'></div>");
 
@@ -26,7 +27,7 @@ export function loadGame() {
 function startGame() {
     $("#rouletteTable").remove();
     $("#roulette")
-        .append("<canvas id='canvas' width='500' height='400'></canvas>")
+        .prepend("<canvas id='canvas' width='400' height='300'></canvas>")
         .append("<div id='message'></div>");
     $("#message").html('');
     if (main.getUserMoney() < BET_COST) {
@@ -37,7 +38,7 @@ function startGame() {
     money = main.getUserMoney() - BET_COST;
     bet = BET_COST;
     main.setUserMoney(money);
-
+    $("#spinBtn").remove();
     engine.drawRoulette();
     engine.spin();
 }
@@ -95,7 +96,6 @@ export function showRouletteTable() {
                 <td class='green'colspan='4'>1st 12</td>
                 <td class='green' colspan='4'>2nd 12</td>
                 <td class='green' colspan='4'>3rd 12</td>
-                <td class='no-border'></td>
             </tr>
             <tr>
                 <td class='no-border'></td>
@@ -105,11 +105,8 @@ export function showRouletteTable() {
                 <td class='black' colspan='2'>Black</td>
                 <td class='green' colspan='2'>Odd</td>
                 <td class='green' colspan='2'>19-36</td>
-                <td class='no-border'></td>
             </tr>
         </table>`);
-
-    $("#roulette").append("<div id='selectedBet'>Your bet is on: <span></span></div>");
 
     $("#rouletteTable td:not(.no-border)").on("click", (ev) => selectBet($(ev.target)));
 }
@@ -130,10 +127,242 @@ export function getBet() {
     return $("#selectedBet span").html();
 }
 
+<<<<<<< HEAD
 // function smallWin() {
 //     $("#message").html('You won!');
 //     money = main.getUserMoney() + BET_COST;
 // }
+=======
+function bettingResult() {
+
+}
+
+function smallWin() {
+    $("#message").html('You won!');
+    money = main.getUserMoney() + BET_COST;
+}
+
+function midWin() {
+    $("#message").html('You won!');
+    money = main.getUserMoney() + 2 * BET_COST;
+}
+
+function loser() {
+    $("#message").html('You lost!');
+    money = main.getUserMoney() - BET_COST;
+}
+
+export function showResult(result) {
+    $("#message").html(result);
+}
+
+//Showing the result of the bet
+// function result() {
+//   var color = '';
+//   var pickNum = '';
+//   switch (text) {
+//     case '3':
+//     case '9':
+//     case '12':
+//     case '18':
+//     case '21':
+//     case '27':
+//     case '30':
+//     case '36':
+//     case '5':
+//     case '14':
+//     case '23':
+//     case '29':
+//     case '32':
+//     case '1':
+//     case '7':
+//     case '16':
+//     case '19':
+//     case '25':
+//     case '34':
+//       color = 'red';
+//       pickNum = text;
+//       break;
+//     case '6':
+//     case '15':
+//     case '24':
+//     case '33':
+//     case '2':
+//     case '8':
+//     case '11':
+//     case '17':
+//     case '20':
+//     case '26':
+//     case '29':
+//     case '35':
+//     case '4':
+//     case '10':
+//     case '13':
+//     case '22':
+//     case '28':
+//     case '31':
+//       color = 'black';
+//       pickNum = text;
+//       break;
+//     case '0':
+//     case '00':
+//       color = 'green';
+//       break;
+//   }
+
+//   if (color === 'red' && selection === 'red') {
+//     smallWin();
+//   }
+
+//   if (color === 'black' && selection === 'red') {
+//     loser();
+//   }
+
+//   if (color === 'black' && selection === 'black') {
+//     smallWin();
+//   }
+
+//   if (color === 'red' && selection === 'black') {
+//     loser();
+//   }
+
+//   if (color === 'green' && (selection == 'red' || selection === 'black')) {
+//     loser();
+//   }
+
+//   if (selection === 'block1' && (parseInt(text) < 13 && parseInt(text) > 0)) {
+//     midWin();
+//   }
+
+//   if (selection === 'block1' && (parseInt(text) >= 13 || color === 'green')) {
+//     loser();
+//   }
+
+//   if (selection === 'block2' && (parseInt(text) >= 13 && parseInt(text) < 25)) {
+//     midWin();
+//   }
+
+//   if (selection === 'block2' && (parseInt(text) < 13 || parseInt(text) > 24 || color == 'green')) {
+//     loser();
+//   }
+
+//   if (selection === 'block3' && (parseInt(text) >= 26 && parseInt(text) < 37)) {
+//     midWin();
+//   }
+
+//   if (selection === 'block3' && (parseInt(text) < 25 || color === 'green')) {
+//     loser();
+//   }
+
+//   if (selection === 'even' && (parseInt(text) % 2 === 0 && (text != ('0' || '00')))) {
+//     smallWin();
+//   }
+
+//   if (selection === 'even' && (parseInt(text) % 2 !== 0)) {
+//     loser();
+//   }
+
+//   if (selection === 'odd' && (parseInt(text) % 2 !== 0)) {
+//     smallWin();
+//   }
+
+//   if (selection == 'odd' && (parseInt(text) % 2 === 0 && (text !== ('0' || '00')))) {
+//     loser();
+//   }
+
+//   if (selection === 'firstHalf' && (parseInt(text) < 19 && (text !== ('0' || '00')))) {
+//     smallWin();
+//   }
+
+//   if (selection === 'firstHalf' && (parseInt(text) >= 19)) {
+//     loser();
+//   }
+
+//   if (selection === 'secondHalf' && (parseInt(text) > 18 && (text !== ('0' || '00')))) {
+//     smallWin();
+//   }
+
+//   if (selection === 'secondHalf' && (parseInt(text) <= 18)) {
+//     loser();
+//   }
+
+//   if (selection === text) {
+//     $("#message").html('Big win!');
+//     money = main.getUserMoney() + 35 * BET_COST;
+//   }
+
+//   if (selection === 'row1') {
+//     switch (text) {
+//       case '3':
+//       case '6':
+//       case '9':
+//       case '12':
+//       case '15':
+//       case "18":
+//       case '21':
+//       case '24':
+//       case '27':
+//       case '30':
+//       case '33':
+//       case '36':
+//         var row = 'row1';
+//         break;
+//     }
+//     if (row === 'row1') {
+//       midWin();
+//     } else {
+//       loser();
+//     }
+//   }
+
+//   if (selection === 'row2') {
+//     switch (text) {
+//       case '2':
+//       case '5':
+//       case '8':
+//       case '11':
+//       case '14':
+//       case "17":
+//       case '20':
+//       case '23':
+//       case '26':
+//       case '29':
+//       case '32':
+//       case '35':
+//         let row = 'row2';
+//         break;
+//     }
+//     if (row === 'row2') {
+//       midWin();
+//     } else {
+//       loser();
+//     }
+//   }
+
+//   if (selection === 'row3') {
+//     switch (text) {
+//       case '1':
+//       case '4':
+//       case '7':
+//       case '10':
+//       case '13':
+//       case "16":
+//       case '19':
+//       case '22':
+//       case '25':
+//       case '28':
+//       case '31':
+//       case '34':
+//         let row = 'row3';
+//         break;
+//     }
+//     if (row === 'row3') {
+//       midWin();
+//     } else {
+//       loser();
+//     }
+//   }
+>>>>>>> refs/remotes/origin/master
 
 // function midWin() {
 //     $("#message").html('You won!');
@@ -146,6 +375,8 @@ export function getBet() {
 // }
 
 function backToMenu() {
-    $("#roulette").remove();
-    main.showMenu();
+    if (!engine.isGameInProgress()) {
+        $("#roulette").remove();
+        main.showMenu();
+    }
 }
