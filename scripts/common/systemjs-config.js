@@ -11,6 +11,7 @@ SystemJS.config({
         'validator': '../scripts/common/validator.js',
         'users-authentication': '../scripts/common/users-authentication.js',
         'user-controller': '../scripts/controllers/user-controllers.js',
+
         'models': '../scripts/common/models.js',
 
         'blackjack': '../scripts/blackjack/ui.js',
