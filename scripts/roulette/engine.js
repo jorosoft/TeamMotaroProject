@@ -132,41 +132,49 @@ function isGameWon(bet) {
             if (+text >= 1 && +text <= 12) {
                 return true;
             }
+            break;
         case "2nd 12":
             if (+text >= 13 && +text <= 24) {
                 return true;
             }
+            break;
         case "3rd 12":
             if (+text >= 25 && +text <= 36) {
                 return true;
             }
+            break;
         case "1-18":
             if (+text >= 1 && +text <= 18) {
                 return true;
             }
+            break;
         case "19-36":
             if (+text >= 19 && +text <= 36) {
                 return true;
             }
+            break;
         case "Even":
             if (+text % 2 === 0) {
                 return true;
             }
+            break;
         case "Odd":
             if (+text % 2 !== 0) {
                 return true;
             }
+            break;
         case "Red":
-            resultIndex = numbers.indexOf(+text);
+            resultIndex = numbers.indexOf(text);
             if (colors[resultIndex] === "#c10000") {
                 return true;
             }
             break;
         case "Black":
-            resultIndex = numbers.indexOf(+text);
+            resultIndex = numbers.indexOf(text);
             if (colors[resultIndex] === "black") {
                 return true;
             }
+            break;
         case "2-1":
             // I don't understand this case :-)
             break;
@@ -174,10 +182,12 @@ function isGameWon(bet) {
             if (text === bet) {
                 return true;
             }
+            break;
         default:
             if (+text === +bet) {
                 return true;
             }
+            break;
     }
 
     return false;
