@@ -111,7 +111,7 @@ export function stopRotateWheel() {
     var index = Math.floor((360 - degrees % 360) / arcd);
     ctx.save();
     ctx.font = 'bold 30px sans-serif';
-    text = numbers[index]
+    text = numbers[index];
     ctx.fillText(text, 145 - ctx.measureText(text).width / 2, 145 + 10);
     if (isGameWon(ui.getBet())) {
         ui.showResult("You win!");

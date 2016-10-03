@@ -37,7 +37,9 @@ export function showMenu() {
         $("#menu")
             .append('<h1>Casino MOTARO</h1>' +
                 '<link rel="stylesheet" href="./style/menu.css">' +
-                '<img id="logo" src="./img/motaro.png" />')
+                '<img id="logo" src="./img/motaro.png" />');
+        $("#menu")
+            .append('<div id="fb-root"><div class="fb-share-button" data-href="https://telerikacademy.com/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftelerikacademy.com%2F&amp;src=sdkpreparse">Share</a></div></div>');
 
     }
     if (!dataService.isLoggedIn()) {
@@ -125,7 +127,7 @@ $("#btn-login").on("click", (ev) => {
 });
 
 $("#btn-register").on("click", (ev) => {
-    console.log(CryptoJS.SHA1($("#tb-password").val()))
+    console.log(CryptoJS.SHA1($("#tb-password").val()));
     let id = userController.generateGUID(),
         pass = CryptoJS.SHA1($("#tb-password").val()),
         user = {
