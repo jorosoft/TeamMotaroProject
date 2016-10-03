@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d74b38e-0aaf-46c8-8435-0958a0eada91" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/controllers/user-controllers.js" afterPath="$PROJECT_DIR$/scripts/controllers/user-controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/common/systemjs-config.js" afterPath="$PROJECT_DIR$/scripts/common/systemjs-config.js" />
     </list>
     <ignored path="TeamMotaroProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,11 +65,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user-controllers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user-controllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/controllers/user-controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+            <state relative-caret-position="521">
+              <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="systemjs-config.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/common/systemjs-config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -115,6 +125,7 @@
       <list>
         <option value="$PROJECT_DIR$/scripts/common/main.js" />
         <option value="$PROJECT_DIR$/scripts/controllers/user-controllers.js" />
+        <option value="$PROJECT_DIR$/scripts/common/systemjs-config.js" />
       </list>
     </option>
   </component>
@@ -254,12 +265,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1475498826185</updated>
-      <workItem from="1475498827739" duration="531000" />
+      <workItem from="1475498827739" duration="723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="531000" />
+    <option name="totallyTimeSpent" value="723000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
@@ -361,8 +372,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/controllers/user-controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+        <state relative-caret-position="521">
+          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/common/systemjs-config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="25" />
           <folding />
         </state>
       </provider>

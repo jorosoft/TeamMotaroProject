@@ -5,13 +5,12 @@ SystemJS.config({
         'systemjs-babel-build': '../lib/systemjs-babel-browser.js',
         'jquery': '../lib/jquery-3.1.0.min.js',
         'bootstrap': '../lib/bootstrap.min.js',
-        'firebase': '../lib/firebase.js',
+        'firebase': '../lib/firebase/firebase.js',
         'jqueryUI': '../lib/jquery-ui.min.js',
         'main': '../scripts/common/main.js',
         'validator': '../scripts/common/validator.js',
         'users-authentication': '../scripts/common/users-authentication.js',
-        'user-controller': '../scripts/controllers/user-controllers.js',
-
+        'user-controllers': '../scripts/controllers/user-controllers.js',
         'models': '../scripts/common/models.js',
 
         'blackjack': '../scripts/blackjack/ui.js',
