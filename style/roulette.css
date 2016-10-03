@@ -67,8 +67,10 @@
     font-family: "arial";
     font-size: 26px;
     float: right;
-    position: relative;
-    top: -46%;
+    display: inline-block;
+    position: absolute;
+    top: 350px;
+    margin-right: 5%;
 }
 
 #selectedBet span {
