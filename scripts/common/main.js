@@ -3,15 +3,16 @@
 import "jquery";
 import "jqueryUI";
 import "bootstrap";
-import * as validate from "validator";
+import "firebase";
 import * as dataService from "users-authentication";
-import * as userController from "user-controller";
+import * as userController from "user-controllers";
+import * as validate from "validator";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
 import * as roulette from "roulette";
-import * as models from "models";
+//import * as models from "models";
 
-var user = new models.User('Pesho');
+//var user = new models.User('Pesho');
 showMenu();
 
 export function getUserMoney() {
@@ -42,8 +43,8 @@ export function showMenu() {
     if (!dataService.isLoggedIn()) {
         showLoginForm();
     }
-    let p = $("#menu");
-    p.append(`<ul>
+    $("#menu")
+        .append(`<ul>
                     <li id="menu-item-one">
                         <a href="#"></a>
                         Blackjack
@@ -116,6 +117,16 @@ function showLoginForm() {
 
 }
 
+let dbConfig = {
+    apiKey: "AIzaSyByJnyxjKvkIRgnQH6qWP2KW7r6433ka0o",
+    authDomain: "casinomotaro.firebaseapp.com",
+    databaseURL: "https://casinomotaro.firebaseio.com",
+    storageBucket: "casinomotaro.appspot.com",
+    messagingSenderId: "966502897965"
+};
+
+firebase.initializeApp(dbConfig);
+
 $("#btn-login").on("click", (ev) => {
     let user = {
         username: $("#tb-username").val(),
@@ -126,15 +137,17 @@ $("#btn-login").on("click", (ev) => {
 });
 
 $("#btn-register").on("click", (ev) => {
-    console.log(CryptoJS.SHA1($("#tb-password").val()));
-    let id = userController.generateGUID(),
+    let guid = 1,
+        username = $("#tb-username").val(),
         pass = CryptoJS.SHA1($("#tb-password").val()),
         user = {
-        username: $("#tb-username").val(),
-        id: id,
-        authKey: userController.generateAuthKey(id),
-        passHash: pass
-    };
+            username: username,
+            guid: guid,
+            authKey: userController.generateAuthKey(guid.toString()),
+            passHash: pass
+        };
+
+    userController.sendUserToDatabase(guid, user);
 
     dataService.register(user)
         .then(() => {
@@ -142,8 +155,7 @@ $("#btn-register").on("click", (ev) => {
         })
         .then(() => {
             $('.userLogout').show();
-        });
-
+        })
 });
 
 $("#btn-logout").on("click", (ev) => {
