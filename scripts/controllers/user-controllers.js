@@ -29,18 +29,7 @@ export function sendUserToDatabase(userId, user) {
             passHash: user.passHash.toString(),
             username: user.username
         });
-        resolve();
-    })
-}
-
-export function writeUserData(userId, user) {
-    return new Promise((resolve, reject) => {
-        firebase.database().ref('users/' + userId).set({
-            guid: user.guid,
-            passHash: user.passHash.toString(),
-            username: user.username
-        });
-        resolve();
+        resolve(user);
     })
 }
 

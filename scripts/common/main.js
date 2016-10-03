@@ -10,9 +10,9 @@ import * as validate from "validator";
 import * as slotMachine from "slotMachine";
 import * as blackjack from "blackjack";
 import * as roulette from "roulette";
-//import * as models from "models";
+import * as models from "models";
 
-//var user = new models.User('Pesho');
+var user = new models.User('Pesho');
 showMenu();
 
 export function getUserMoney() {
@@ -137,19 +137,20 @@ $("#btn-login").on("click", (ev) => {
 });
 
 $("#btn-register").on("click", (ev) => {
-    let guid = 1,
+    let guid = userController.generateGUID(),
         username = $("#tb-username").val(),
         pass = CryptoJS.SHA1($("#tb-password").val()),
         user = {
             username: username,
-            guid: guid,
+            guid: guid.toString(),
             authKey: userController.generateAuthKey(guid.toString()),
             passHash: pass
         };
 
-    userController.sendUserToDatabase(guid, user);
-
-    dataService.register(user)
+    userController.sendUserToDatabase(user.guid, user)
+        .then((reqUser) =>{
+            dataService.register(reqUser)
+        })
         .then(() => {
             $('.loginForm').remove();
         })
