@@ -22,7 +22,7 @@ export function setUserMoney(value) {
     user.money = value;
 }
 
-export function showMenu() {
+export function showMenu() {    
     if ($("#gameField").find("#menu").length === 0) {
         $("#gameField").append(`<div id='menu'></div>` +
             `<div class="userLogout row">` +
@@ -38,9 +38,6 @@ export function showMenu() {
             .append('<h1>Casino MOTARO</h1>' +
                 '<link rel="stylesheet" href="./style/menu.css">' +
                 '<img id="logo" src="./img/motaro.png" />');
-        $("#menu")
-            .append('<div id="fb-root"><div class="fb-share-button" data-href="https://telerikacademy.com/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftelerikacademy.com%2F&amp;src=sdkpreparse">Share</a></div></div>');
-
     }
     if (!dataService.isLoggedIn()) {
         showLoginForm();
@@ -91,6 +88,8 @@ export function showMenu() {
             slotMachine.loadGame();
         }
     });
+    $("#menu")
+            .append('<div id="fb-root"><div class="fb-share-button" data-href="https://telerikacademy.com/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftelerikacademy.com%2F&amp;src=sdkpreparse">Share</a></div></div>');
 }
 
 function showLoginForm() {

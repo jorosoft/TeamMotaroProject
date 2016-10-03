@@ -10,6 +10,7 @@ var money,
 
 export function loadGame() {
     $("#menu").find("ul").remove();
+    $("#menu").find("#fb-root").remove();
     $("#menu").append("<div id='roulette'></div>");
 
     showRouletteTable();
