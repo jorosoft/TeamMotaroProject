@@ -146,7 +146,7 @@ $("#btn-register").on("click", (ev) => {
             authKey: userController.generateAuthKey(guid.toString()),
             passHash: pass
         };
-
+    let currentUserName = username;
     userController.sendUserToDatabase(user.guid, user)
         .then((reqUser) =>{
             dataService.register(reqUser)
@@ -154,8 +154,9 @@ $("#btn-register").on("click", (ev) => {
         .then(() => {
             $('.loginForm').remove();
         })
-        .then(() => {
+        .then((currentUserName) => {
             $('.userLogout').show();
+            $('#player').html(`Player: ${localStorage.getItem('username')}`);
         })
 });
 

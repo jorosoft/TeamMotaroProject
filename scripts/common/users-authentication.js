@@ -25,7 +25,7 @@ export function register(respUser) {
         localStorage.setItem(GENERATED_ID_KEY, respUser.id);
         localStorage.setItem(HTTP_HEADER_KEY, respUser.authKey);
         localStorage.setItem(PASSWORD_AUTH_KEY, respUser.passHash);
-        resolve();
+        resolve(respUser.username);
     });
 }
 
