@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "BackToBlack";
+    src: url("../fonts/back-to-black-bold.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#gameField {
+    width: 1024px;
+    height: 576px;
+    border: 1px solid black;
+    background-color: darkgreen;
+    margin-top: 2%;
+    margin-left: 12%;
+}

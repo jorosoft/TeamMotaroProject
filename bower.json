@@ -1,0 +1,24 @@
+{
+  "name": "Motaro-Casino-Oct-2016",
+  "version": "0.0.0",
+  "authors": [
+    "Sevdalina Pashova",
+    "Живко Иванов",
+    "Pavel Apostolov",
+    "Юлиан Теофилов",
+    "Ilian Bratanov",
+    "Venelin Petkov"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components"
+  ],
+  "dependencies": {
+    "firebase": "^3.4.1",
+    "cryptojs": "*",
+    "crypto-js": "^3.1.6"
+  }
+}

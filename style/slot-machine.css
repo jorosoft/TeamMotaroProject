@@ -1,0 +1,53 @@
+#slotMachine {
+    width: 600px;
+    height: 370px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 5%;
+    background: url('../img/slot-machine/slot-machine.png') no-repeat;
+}
+
+#slotMachine button {
+    width: 120px;
+    height: 50px;
+    float: right;
+}
+
+#slotMachine #backBtn {
+    width: 120px;
+    position: relative;
+    top: 100px;
+    left: 20%;
+}
+
+.slot {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    position: relative;
+    top: 153px;
+}
+
+#slotOne {
+    left: 46px;
+}
+
+#slotTwo {
+    left: 81px;
+}
+
+#slotThree {
+    left: 116px;
+}
+
+#result {
+    width: 350px;
+    height: 200px;
+    text-align: center;
+    font-family: "arial";
+    font-size: 76px;
+    font-weight: bold;
+    position: relative;
+    top: 2%;
+    left: 9%;
+}

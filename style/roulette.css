@@ -1,0 +1,107 @@
+#roulette {
+    width: 550px;
+    height: 300px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 5%;
+}
+
+#canvas {
+    display: inline-block;
+}
+
+#roulette button {
+    position: relative;
+    top: 10px;
+    left: 10%;
+}
+
+#roulette #backBtn {
+    width: 120px;
+    height: 40px;
+    float: right;
+    margin-right: 5%;
+}
+
+#roulette #spinBtn {
+    width: 70px;
+    height: 50px;
+    float: right;
+    margin-right: 5%;
+    position: relative;
+    top: -70%;
+}
+
+#table {
+    width: 200px;
+    height: 200px;
+}
+
+#rouletteTable {
+    width: 400px;
+    height: 300px;
+    display: inline-block;
+}
+
+#rouletteTable table {
+    border-collapse: collapse;
+}
+
+#rouletteTable td:not(.no-border) {
+    cursor: pointer;
+}
+
+#rouletteTable table td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-family: "arial";
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+#selectedBet {
+    width: 180px;
+    height: 80px;
+    font-family: "arial";
+    font-size: 26px;
+    float: right;
+    display: inline-block;
+    position: absolute;
+    top: 350px;
+    margin-right: 5%;
+}
+
+#selectedBet span {
+    color: darkgray;
+    font-weight: bold;
+    position: relative;
+    left: 30%;
+}
+
+#message {
+    font-family: "arial";
+    font-weight: bold;
+    color: brown;
+    font-size: 42px;
+}
+
+.no-border {
+    border: none !important;
+}
+
+.green {
+    background-color: darkgreen;
+    color: white;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.black {
+    background-color: black;
+    color: white;
+}
