@@ -72,3 +72,8 @@
 #menu-item-three {
     background: url("../img/slot-machine.png") no-repeat;
 }
+
+.fb-root {
+    position: relative;
+    bottom: 10%;
+}

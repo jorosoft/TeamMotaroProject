@@ -24,6 +24,7 @@ var imageSprite = '../img/cards-sprite.png',
 
 export function loadGame() {
     $("#menu").find("ul").remove();
+    $("#menu").find("#fb-root").remove();
     $("#menu").append("<div id='blackjack'></div>");
 
     $("#blackjack")

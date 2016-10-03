@@ -10,6 +10,7 @@ var money,
 
 export function loadGame() {
     $("#menu").find("ul").remove();
+    $("#menu").find("#fb-root").remove();
     $("#menu").append("<div id='roulette'></div>");
 
     showRouletteTable();
@@ -19,7 +20,7 @@ export function loadGame() {
         .append("<button id='spinBtn' class='btn btn-default btn-small btn-block'>Spin</button>")
         .append("<div id='selectedBet'>Your bet is on: <span></span></div>")
         .append("<link rel='stylesheet' href='style/roulette.css'>");
-        
+
     $("#backBtn").on("click", backToMenu);
     $("#spinBtn").on("click", startGame);
 }

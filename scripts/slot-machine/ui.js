@@ -17,6 +17,7 @@ let gameStarted = false;
 
 export function loadGame() {
     $("#menu").find("ul").remove();
+    $("#menu").find("#fb-root").remove();
     $("#menu").append("<div id='slotMachine'></div>");
 
     $("#slotMachine")
